@@ -1,16 +1,16 @@
 ---
 title: "Webhooks"
-description: "Setting up and managing webhooks in ChaterAfrika"
+description: "Setting up and managing webhooks in Vocantly"
 ---
 
 ## Overview
 
-Webhooks allow you to receive real-time notifications about events in your ChaterAfrika instance. Configure webhook endpoints to receive HTTP POST requests when events occur.
+Webhooks allow you to receive real-time notifications about events in your Vocantly instance. Configure webhook endpoints to receive HTTP POST requests when events occur.
 
 ## How Webhooks Work
 
 ```
-1. Event occurs in ChaterAfrika
+1. Event occurs in Vocantly
    ↓
 2. Webhook service publishes event
    ↓
@@ -84,7 +84,7 @@ Webhooks allow you to receive real-time notifications about events in your Chate
 
 **Example:**
 ```bash
-curl -X POST https://api.chaterafrika.com/api/v1/apps/{appId}/webhooks \
+curl -X POST https://api.vocantly.com/api/v1/apps/{appId}/webhooks \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -183,7 +183,7 @@ function verifyWebhookSignature(
 }
 
 // In your webhook handler
-const signature = req.headers['x-chatafrika-signature'];
+const signature = req.headers['x-vocantly-signature'];
 const isValid = verifyWebhookSignature(
   JSON.stringify(req.body),
   signature,
@@ -193,10 +193,10 @@ const isValid = verifyWebhookSignature(
 
 ### Signature Header
 
-The signature is sent in the `X-ChatAfrika-Signature` header:
+The signature is sent in the `X-Vocantly-Signature` header:
 
 ```
-X-ChatAfrika-Signature: sha256=abc123...
+X-Vocantly-Signature: sha256=abc123...
 ```
 
 ## Webhook Delivery
@@ -220,7 +220,7 @@ Failed deliveries (non-2xx or timeout) are retried on an increasing backoff sche
 ### Viewing Deliveries
 
 ```bash
-curl https://api.chaterafrika.com/api/v1/apps/{appId}/webhooks/{webhookId}/deliveries \
+curl https://api.vocantly.com/api/v1/apps/{appId}/webhooks/{webhookId}/deliveries \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -256,7 +256,7 @@ Any HTTP status code other than 2xx is considered a failure and will trigger ret
 ```typescript
 app.post('/webhooks', async (req, res) => {
   // Verify signature
-  const signature = req.headers['x-chatafrika-signature'];
+  const signature = req.headers['x-vocantly-signature'];
   if (!verifySignature(req.body, signature, secret)) {
     return res.status(401).send('Invalid signature');
   }

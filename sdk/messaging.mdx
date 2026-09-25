@@ -1,11 +1,11 @@
 ---
 title: "SDK Messaging"
-description: "Sending and receiving messages with the ChaterAfrika SDK"
+description: "Sending and receiving messages with the Vocantly SDK"
 ---
 
 ## Overview
 
-ChaterAfrika uses WebSockets for all messaging operations. Messages are sent through the SDK and delivered in real-time to all conversation participants.
+Vocantly uses WebSockets for all messaging operations. Messages are sent through the SDK and delivered in real-time to all conversation participants.
 
 <Warning>
 **Messages are sent exclusively over WebSockets.**
@@ -140,16 +140,16 @@ The SDK automatically handles duplicate messages:
 ## Complete Example
 
 ```typescript
-import { ChatAfrika, Message } from '@chaterafrikang/sdk';
+import { Vocantly, Message } from '@vocantly/sdk';
 
 class ChatUI {
-  private client: ChatAfrika;
+  private client: Vocantly;
   private conversation: Conversation;
   private messages: Map<string, Message> = new Map();
 
   async initialize(token: string, conversationId: string) {
-    this.client = new ChatAfrika({
-      wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+    this.client = new Vocantly({
+      wsUrl: 'wss://ws.dev.vocantly.com/ws',
       token,
       debug: true
     });
@@ -217,9 +217,9 @@ chat.sendMessage('Hello, world!');
 
 ```tsx
 import { useState, useEffect, useCallback } from 'react';
-import { ChatAfrika, Message, Conversation } from '@chaterafrikang/sdk';
+import { Vocantly, Message, Conversation } from '@vocantly/sdk';
 
-function useMessages(client: ChatAfrika, conversationId: string) {
+function useMessages(client: Vocantly, conversationId: string) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [conversation, setConversation] = useState<Conversation | null>(null);
 

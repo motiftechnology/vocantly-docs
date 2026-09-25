@@ -1,6 +1,6 @@
 ---
 title: "SDK Presence"
-description: "User presence management with the ChaterAfrika SDK"
+description: "User presence management with the Vocantly SDK"
 ---
 
 ## Overview
@@ -89,9 +89,9 @@ function updateOnlineUsersList() {
 
 ```tsx
 import { useState, useEffect } from 'react';
-import { ChatAfrika, PresenceEvent } from '@chaterafrikang/sdk';
+import { Vocantly, PresenceEvent } from '@vocantly/sdk';
 
-function usePresence(client: ChatAfrika) {
+function usePresence(client: Vocantly) {
   const [onlineUsers, setOnlineUsers] = useState<Set<string>>(new Set());
 
   useEffect(() => {
@@ -142,12 +142,12 @@ function UserList({ client, users }) {
 
 ```typescript
 class ChatUI {
-  private client: ChatAfrika;
+  private client: Vocantly;
   private onlineUsers: Map<string, boolean> = new Map();
 
   async initialize(token: string) {
-    this.client = new ChatAfrika({
-      wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+    this.client = new Vocantly({
+      wsUrl: 'wss://ws.dev.vocantly.com/ws',
       token
     });
 
@@ -211,14 +211,14 @@ Presence events are deduplicated by the SDK. You'll only receive an event when t
 ## Complete Example
 
 ```typescript
-import { ChatAfrika, PresenceEvent } from '@chaterafrikang/sdk';
+import { Vocantly, PresenceEvent } from '@vocantly/sdk';
 
 class PresenceManager {
-  private client: ChatAfrika;
+  private client: Vocantly;
   private presenceState: Map<string, 'online' | 'offline'> = new Map();
   private listeners: Array<(userId: string, state: 'online' | 'offline') => void> = [];
 
-  constructor(client: ChatAfrika) {
+  constructor(client: Vocantly) {
     this.client = client;
     
     // Listen for presence events
@@ -257,8 +257,8 @@ class PresenceManager {
 }
 
 // Usage
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
   token: 'your-token'
 });
 

@@ -1,11 +1,11 @@
 ---
 title: "Messages"
-description: "Sending, receiving, and managing messages in ChaterAfrika"
+description: "Sending, receiving, and managing messages in Vocantly"
 ---
 
 ## Overview
 
-Messages are the core communication unit in ChaterAfrika. They support real-time delivery, persistence, receipts, and various message types.
+Messages are the core communication unit in Vocantly. They support real-time delivery, persistence, receipts, and various message types.
 
 ## Message Flow
 
@@ -30,9 +30,9 @@ Messages are sent through WebSocket connections for real-time delivery.
 **Using the SDK:**
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
-const client = new ChatAfrika({ /* config */ });
+const client = new Vocantly({ /* config */ });
 await client.connect();
 await client.conversations.join(conversationId);
 
@@ -82,7 +82,7 @@ Retrieve message history using the REST API:
 
 ```typescript
 const response = await fetch(
-  `https://api.chaterafrika.com/api/v1/conversations/${conversationId}/messages?limit=50`,
+  `https://api.vocantly.com/api/v1/conversations/${conversationId}/messages?limit=50`,
   {
     headers: {
       'Authorization': `Bearer ${accessToken}`
@@ -183,12 +183,12 @@ Messages are paginated using cursor-based pagination:
 ```typescript
 // First page
 const page1 = await fetch(
-  `https://api.chaterafrika.com/api/v1/conversations/${conversationId}/messages?limit=50`
+  `https://api.vocantly.com/api/v1/conversations/${conversationId}/messages?limit=50`
 );
 
 // Next page
 const page2 = await fetch(
-  `https://api.chaterafrika.com/api/v1/conversations/${conversationId}/messages?limit=50&cursor=${page1.data.pagination.next_cursor}`
+  `https://api.vocantly.com/api/v1/conversations/${conversationId}/messages?limit=50&cursor=${page1.data.pagination.next_cursor}`
 );
 ```
 

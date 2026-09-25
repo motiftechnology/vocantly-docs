@@ -1,6 +1,6 @@
 ---
 title: "SDK Examples"
-description: "Complete code examples for the ChaterAfrika SDK"
+description: "Complete code examples for the Vocantly SDK"
 ---
 
 ## Basic Chat Application
@@ -8,15 +8,15 @@ description: "Complete code examples for the ChaterAfrika SDK"
 A complete example of a basic chat application:
 
 ```typescript
-import { ChatAfrika, Conversation, Message } from '@chaterafrikang/sdk';
+import { Vocantly, Conversation, Message } from '@vocantly/sdk';
 
 class ChatApp {
-  private client: ChatAfrika;
+  private client: Vocantly;
   private conversations: Map<string, Conversation> = new Map();
 
   async initialize(token: string) {
-    this.client = new ChatAfrika({
-      wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+    this.client = new Vocantly({
+      wsUrl: 'wss://ws.dev.vocantly.com/ws',
       token,
       debug: true
     });
@@ -100,18 +100,18 @@ app.sendMessage('conv-123', 'Hello, world!');
 
 ```tsx
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { ChatAfrika, Conversation, Message, ConnectionState } from '@chaterafrikang/sdk';
+import { Vocantly, Conversation, Message, ConnectionState } from '@vocantly/sdk';
 
 // Hook for SDK connection
-function useChatAfrika(token: string) {
-  const [client, setClient] = useState<ChatAfrika | null>(null);
+function useVocantly(token: string) {
+  const [client, setClient] = useState<Vocantly | null>(null);
   const [connectionState, setConnectionState] = useState<ConnectionState>(
     ConnectionState.DISCONNECTED
   );
 
   useEffect(() => {
-    const chatClient = new ChatAfrika({
-      wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+    const chatClient = new Vocantly({
+      wsUrl: 'wss://ws.dev.vocantly.com/ws',
       token,
       debug: true
     });
@@ -128,7 +128,7 @@ function useChatAfrika(token: string) {
 }
 
 // Hook for conversation
-function useConversation(client: ChatAfrika | null, conversationId: string) {
+function useConversation(client: Vocantly | null, conversationId: string) {
   const [conversation, setConversation] = useState<Conversation | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [typingUsers, setTypingUsers] = useState<string[]>([]);
@@ -175,7 +175,7 @@ function useConversation(client: ChatAfrika | null, conversationId: string) {
 
 // Chat component
 function Chat({ token, conversationId }: { token: string; conversationId: string }) {
-  const { client, connectionState } = useChatAfrika(token);
+  const { client, connectionState } = useVocantly(token);
   const { conversation, messages, typingUsers } = useConversation(client, conversationId);
   const [input, setInput] = useState('');
   const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -250,12 +250,12 @@ export default Chat;
 ## Node.js CLI Chat
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 import * as readline from 'readline';
 
 async function main() {
-  const client = new ChatAfrika({
-    wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+  const client = new Vocantly({
+    wsUrl: 'wss://ws.dev.vocantly.com/ws',
     token: process.env.SDK_TOKEN!,
     debug: false
   });
@@ -314,10 +314,10 @@ main().catch(console.error);
 ## Support Chat Widget
 
 ```typescript
-import { ChatAfrika, SupportSession } from '@chaterafrikang/sdk';
+import { Vocantly, SupportSession } from '@vocantly/sdk';
 
 class SupportWidget {
-  private client: ChatAfrika;
+  private client: Vocantly;
   private conversationId: string;
   private container: HTMLElement;
 
@@ -328,8 +328,8 @@ class SupportWidget {
   async initialize(token: string, conversationId: string) {
     this.conversationId = conversationId;
 
-    this.client = new ChatAfrika({
-      wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+    this.client = new Vocantly({
+      wsUrl: 'wss://ws.dev.vocantly.com/ws',
       token
     });
 
@@ -433,10 +433,10 @@ widget.initialize(token, 'conversation-id');
 ## Multi-Conversation Manager
 
 ```typescript
-import { ChatAfrika, Conversation, Message } from '@chaterafrikang/sdk';
+import { Vocantly, Conversation, Message } from '@vocantly/sdk';
 
 class MultiChatManager {
-  private client: ChatAfrika;
+  private client: Vocantly;
   private conversations: Map<string, {
     conversation: Conversation;
     messages: Message[];
@@ -451,8 +451,8 @@ class MultiChatManager {
   }
 
   async initialize(token: string) {
-    this.client = new ChatAfrika({
-      wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+    this.client = new Vocantly({
+      wsUrl: 'wss://ws.dev.vocantly.com/ws',
       token
     });
 

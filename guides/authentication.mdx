@@ -46,7 +46,7 @@ Your backend calls `POST /api/v1/apps/:appId/tokens` with either your API keys o
 JWT, and returns the token to your frontend.
 
 ```bash
-curl -X POST https://dev.chaterafrika.com/api/v1/apps/YOUR_APP_ID/tokens \
+curl -X POST https://dev.vocantly.com/api/v1/apps/YOUR_APP_ID/tokens \
   -H "Content-Type: application/json" \
   -H "X-Api-Key: pk_xxxxx" \
   -H "X-Api-Secret: sk_xxxxx" \
@@ -77,9 +77,9 @@ Once your frontend has a token, hand it to the SDK or widget — it manages the 
 connection and auth for you:
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
-const client = new ChatAfrika({ wsUrl: 'wss://ws.dev.chaterafrika.com/ws', token });
+const client = new Vocantly({ wsUrl: 'wss://ws.dev.vocantly.com/ws', token });
 await client.connect();
 ```
 

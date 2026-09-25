@@ -1,6 +1,6 @@
 ---
 title: "SDK Receipts"
-description: "Read receipts with the ChaterAfrika SDK"
+description: "Read receipts with the Vocantly SDK"
 ---
 
 ## Overview
@@ -104,7 +104,7 @@ class MessageTracker {
 
 ```tsx
 import { useState, useEffect } from 'react';
-import { Conversation, Message } from '@chaterafrikang/sdk';
+import { Conversation, Message } from '@vocantly/sdk';
 
 interface MessageWithStatus extends Message {
   displayStatus: 'sending' | 'sent' | 'delivered' | 'read';
@@ -204,16 +204,16 @@ Common patterns for showing message status:
 ## Complete Example
 
 ```typescript
-import { ChatAfrika, Conversation, Message } from '@chaterafrikang/sdk';
+import { Vocantly, Conversation, Message } from '@vocantly/sdk';
 
 class ChatWithReceipts {
-  private client: ChatAfrika;
+  private client: Vocantly;
   private conversation: Conversation;
   private messageStatuses: Map<string, string> = new Map();
 
   async initialize(token: string, conversationId: string) {
-    this.client = new ChatAfrika({
-      wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+    this.client = new Vocantly({
+      wsUrl: 'wss://ws.dev.vocantly.com/ws',
       token
     });
 

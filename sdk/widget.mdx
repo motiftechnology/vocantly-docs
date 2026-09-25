@@ -5,13 +5,13 @@ description: "Drop a live-chat + AI bot support bubble onto any site with one sc
 
 ## Overview
 
-The **ChatAfrika Widget** (`@chaterafrikang/widget`) is a drop-in support chat bubble built on top of
+The **Vocantly Widget** (`@vocantly/widget`) is a drop-in support chat bubble built on top of
 the headless SDK. One `<script>` renders a floating launcher + chat panel; your visitors talk to the
 **AI bot** (and human agents) with zero UI work on your side. Everything — the SDK, its dependencies,
 and the UI — is bundled into a single self-contained file.
 
 <Note>
-The SDK (`@chaterafrikang/sdk`) is **headless** — logic only, no UI. Use it directly if you want to
+The SDK (`@vocantly/sdk`) is **headless** — logic only, no UI. Use it directly if you want to
 build your own chat interface. Use the **widget** when you want a ready-made bubble.
 </Note>
 
@@ -19,19 +19,19 @@ build your own chat interface. Use the **widget** when you want a ready-made bub
 
 <CodeGroup>
 ```html Script tag (any site)
-<!-- unpkg / jsDelivr serve the bundled build; global: ChatAfrikaWidget -->
-<script src="https://unpkg.com/@chaterafrikang/widget"></script>
+<!-- unpkg / jsDelivr serve the bundled build; global: VocantlyWidget -->
+<script src="https://unpkg.com/@vocantly/widget"></script>
 ```
 
 ```bash npm (React / Vue / Next)
-npm install @chaterafrikang/widget
+npm install @vocantly/widget
 ```
 </CodeGroup>
 
 ```js
-import { init } from '@chaterafrikang/widget'; // npm
+import { init } from '@vocantly/widget'; // npm
 init({ wsUrl, /* … */ });
-// or, with the script tag: ChatAfrikaWidget.init({ wsUrl, … })
+// or, with the script tag: VocantlyWidget.init({ wsUrl, … })
 ```
 
 ## The security model
@@ -64,11 +64,11 @@ const { token, conversation_id } = (await r.json()).data;
 </Step>
 <Step title="Frontend boots the widget">
 ```html
-<script src="https://unpkg.com/@chaterafrikang/widget"></script>
+<script src="https://unpkg.com/@vocantly/widget"></script>
 <script>
-  ChatAfrikaWidget.init({
-    wsUrl: 'wss://ws.chatafrika.com/ws',
-    apiUrl: 'https://api.chatafrika.com/api/v1',
+  VocantlyWidget.init({
+    wsUrl: 'wss://ws.vocantly.com/ws',
+    apiUrl: 'https://api.vocantly.com/api/v1',
     token, conversationId,     // from your backend
     title: 'Support', primaryColor: '#195EFF',
   });
@@ -83,12 +83,12 @@ For a **static landing page** with unauthenticated visitors and no server, embed
 **public key**. The widget self-provisions an anonymous session — no secret in the browser.
 
 ```html
-<script src="https://unpkg.com/@chaterafrikang/widget"></script>
+<script src="https://unpkg.com/@vocantly/widget"></script>
 <script>
-  ChatAfrikaWidget.init({
+  VocantlyWidget.init({
     publicKey: 'pk_…',                            // safe to expose
-    wsUrl:  'wss://ws.chatafrika.com/ws',
-    apiUrl: 'https://api.chatafrika.com/api/v1',  // required in this mode
+    wsUrl:  'wss://ws.vocantly.com/ws',
+    apiUrl: 'https://api.vocantly.com/api/v1',  // required in this mode
     collectContact: true,
   });
 </script>
@@ -122,9 +122,9 @@ reload resumes the same conversation and maps to the same customer.
 ## Controlling the widget
 
 ```js
-const w = ChatAfrikaWidget.init({ … });
+const w = VocantlyWidget.init({ … });
 w.open(); w.close(); w.send('Hi'); w.destroy();
-// also: ChatAfrikaWidget.open() / .close() / .destroy()
+// also: VocantlyWidget.open() / .close() / .destroy()
 ```
 
 ## Pre-chat contact capture

@@ -1,6 +1,6 @@
 ---
 title: "SDK Support Sessions"
-description: "Support session management with the ChaterAfrika SDK"
+description: "Support session management with the Vocantly SDK"
 ---
 
 ## Overview
@@ -56,7 +56,7 @@ curl -X PATCH "$API/sdk/customers/me" \
 Then connect the SDK and open the session:
 
 ```typescript
-const client = new ChatAfrika({ wsUrl, apiUrl, token });   // token from above
+const client = new Vocantly({ wsUrl, apiUrl, token });   // token from above
 await client.connect();
 await client.conversations.join(conversationId);
 const support = client.support.get(conversationId, 'customer');
@@ -144,11 +144,11 @@ session.on('closed', (event) => {
 ## Customer Flow
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
 async function customerSupportFlow() {
-  const client = new ChatAfrika({
-    wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+  const client = new Vocantly({
+    wsUrl: 'wss://ws.dev.vocantly.com/ws',
     token // customer token from your backend
   });
 
@@ -186,11 +186,11 @@ async function customerSupportFlow() {
 ## Agent Flow
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
 async function agentSupportFlow() {
-  const client = new ChatAfrika({
-    wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+  const client = new Vocantly({
+    wsUrl: 'wss://ws.dev.vocantly.com/ws',
     token // agent token from your backend
   });
 
@@ -225,11 +225,11 @@ async function agentSupportFlow() {
 
 ```tsx
 import { useState, useEffect } from 'react';
-import { ChatAfrika, SupportSession } from '@chaterafrikang/sdk';
+import { Vocantly, SupportSession } from '@vocantly/sdk';
 
 type SupportStatus = 'bot' | 'queued' | 'assigned' | 'closed';
 
-function useSupportSession(client: ChatAfrika, conversationId: string, role: 'customer' | 'agent') {
+function useSupportSession(client: Vocantly, conversationId: string, role: 'customer' | 'agent') {
   const [status, setStatus] = useState<SupportStatus>('bot');
   const [agentInfo, setAgentInfo] = useState<{ id: string; name: string } | null>(null);
 
@@ -285,10 +285,10 @@ function SupportChat({ client, conversationId }) {
 ## Complete Example
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
 class SupportChat {
-  private client: ChatAfrika;
+  private client: Vocantly;
   private conversationId: string;
   private role: 'customer' | 'agent';
 
@@ -296,8 +296,8 @@ class SupportChat {
     this.conversationId = conversationId;
     this.role = role;
 
-    this.client = new ChatAfrika({
-      wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+    this.client = new Vocantly({
+      wsUrl: 'wss://ws.dev.vocantly.com/ws',
       token
     });
 

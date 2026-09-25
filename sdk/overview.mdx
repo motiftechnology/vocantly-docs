@@ -1,11 +1,11 @@
 ---
 title: "SDK Overview"
-description: "Complete guide to the ChaterAfrika JavaScript SDK"
+description: "Complete guide to the Vocantly JavaScript SDK"
 ---
 
 ## Introduction
 
-The ChaterAfrika JavaScript SDK is a headless SDK for integrating real-time chat, messaging, presence, and support features into your applications.
+The Vocantly JavaScript SDK is a headless SDK for integrating real-time chat, messaging, presence, and support features into your applications.
 
 <Tip>
 Just want a drop-in support chat bubble (AI bot + live agents) without building UI? Use the
@@ -26,19 +26,19 @@ REST APIs are used for history, analytics, and internal automation only.
 ## Installation
 
 ```bash
-npm install @chaterafrikang/sdk
+npm install @vocantly/sdk
 ```
 
-For **testing** (beta): `npm install @chaterafrikang/sdk@beta`
+For **testing** (beta): `npm install @vocantly/sdk@beta`
 
 ## Quick Start
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
 // Token from your backend (POST /apps/:id/tokens)—never keys
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
   token,
   debug: true
 });
@@ -76,7 +76,7 @@ conversation.sendMessage('Hello, world!');
 ## SDK Architecture
 
 ```
-ChatAfrika (Main Client)
+Vocantly (Main Client)
 ├── conversations
 │   ├── get(id) → Conversation
 │   ├── has(id) → boolean
@@ -102,7 +102,7 @@ Conversation
 
 ```typescript
 interface ClientConfig {
-  wsUrl: string;   // Required. e.g. 'wss://ws.dev.chaterafrika.com/ws'
+  wsUrl: string;   // Required. e.g. 'wss://ws.dev.vocantly.com/ws'
   token: string;   // Required. From your backend (POST /apps/:id/tokens)
 
   apiUrl?: string; // Optional. Needed for client.conversations.list() and conversation.fetchMessages()
@@ -120,13 +120,13 @@ interface ClientConfig {
 
 ## API Reference
 
-### ChatAfrika Client
+### Vocantly Client
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
   token // from your backend
 });
 
@@ -254,13 +254,13 @@ The SDK is written in TypeScript and includes full type definitions:
 
 ```typescript
 import { 
-  ChatAfrika, 
+  Vocantly, 
   Conversation,
   Message,
   ConnectionState 
-} from '@chaterafrikang/sdk';
+} from '@vocantly/sdk';
 
-const client: ChatAfrika = new ChatAfrika({ /* config */ });
+const client: Vocantly = new Vocantly({ /* config */ });
 const conversation: Conversation = client.conversations.get('id');
 ```
 

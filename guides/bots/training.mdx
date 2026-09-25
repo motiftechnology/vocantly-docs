@@ -24,7 +24,7 @@ FAQs are the bot's primary knowledge. Keep questions phrased the way customers a
 
 <CodeGroup>
 ```bash Create an FAQ
-curl -X POST https://dev.chaterafrika.com/api/v1/apps/{appId}/faqs \
+curl -X POST https://dev.vocantly.com/api/v1/apps/{appId}/faqs \
   -H "Authorization: Bearer DASHBOARD_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -34,17 +34,17 @@ curl -X POST https://dev.chaterafrika.com/api/v1/apps/{appId}/faqs \
 ```
 
 ```bash List FAQs
-curl https://dev.chaterafrika.com/api/v1/apps/{appId}/faqs \
+curl https://dev.vocantly.com/api/v1/apps/{appId}/faqs \
   -H "Authorization: Bearer DASHBOARD_TOKEN"
 ```
 
 ```bash Update / delete
-curl -X PATCH https://dev.chaterafrika.com/api/v1/apps/{appId}/faqs/{id} \
+curl -X PATCH https://dev.vocantly.com/api/v1/apps/{appId}/faqs/{id} \
   -H "Authorization: Bearer DASHBOARD_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{ "answer": "Updated answer text." }'
 
-curl -X DELETE https://dev.chaterafrika.com/api/v1/apps/{appId}/faqs/{id} \
+curl -X DELETE https://dev.vocantly.com/api/v1/apps/{appId}/faqs/{id} \
   -H "Authorization: Bearer DASHBOARD_TOKEN"
 ```
 </CodeGroup>
@@ -60,7 +60,7 @@ Upload PDFs to give the bot broader context than FAQs alone. The platform extrac
 and uses it when generating replies.
 
 ```bash
-curl -X POST https://dev.chaterafrika.com/api/v1/apps/{appId}/knowledge/documents \
+curl -X POST https://dev.vocantly.com/api/v1/apps/{appId}/knowledge/documents \
   -H "Authorization: Bearer DASHBOARD_TOKEN" \
   -F "file=@product-guide.pdf" \
   -F "label=Product guide"
@@ -80,7 +80,7 @@ an explicit FAQ.
 Configure the bot per app (optionally per department):
 
 ```bash
-curl -X PUT https://dev.chaterafrika.com/api/v1/apps/{appId}/bots/config \
+curl -X PUT https://dev.vocantly.com/api/v1/apps/{appId}/bots/config \
   -H "Authorization: Bearer DASHBOARD_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{

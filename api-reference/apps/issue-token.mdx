@@ -5,7 +5,7 @@ api: "POST /api/v1/apps/:appId/tokens"
 
 ## Overview
 
-Issue a short-lived SDK token for an external user. Use this token in your frontend with the ChatAfrika SDK or WebSocket connection. **Your backend** calls this endpoint; the **frontend** never sees App ID, public key, or secret key—only the token.
+Issue a short-lived SDK token for an external user. Use this token in your frontend with the Vocantly SDK or WebSocket connection. **Your backend** calls this endpoint; the **frontend** never sees App ID, public key, or secret key—only the token.
 
 <Note>
 **Authenticate with either JWT or API key:**
@@ -51,7 +51,7 @@ Issue a short-lived SDK token for an external user. Use this token in your front
 ### With API key (server-to-server)
 
 ```bash
-curl -X POST https://dev.chaterafrika.com/api/v1/apps/YOUR_APP_ID/tokens \
+curl -X POST https://dev.vocantly.com/api/v1/apps/YOUR_APP_ID/tokens \
   -H "Content-Type: application/json" \
   -H "X-Api-Key: pk_xxxxx" \
   -H "X-Api-Secret: sk_xxxxx" \
@@ -65,7 +65,7 @@ curl -X POST https://dev.chaterafrika.com/api/v1/apps/YOUR_APP_ID/tokens \
 ### With JWT
 
 ```bash
-curl -X POST https://dev.chaterafrika.com/api/v1/apps/YOUR_APP_ID/tokens \
+curl -X POST https://dev.vocantly.com/api/v1/apps/YOUR_APP_ID/tokens \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
   -d '{
@@ -113,11 +113,11 @@ curl -X POST https://dev.chaterafrika.com/api/v1/apps/YOUR_APP_ID/tokens \
 **Frontend:** Use only the token—never keys.
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
 // token from your backend
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
   token,
 });
 await client.connect();

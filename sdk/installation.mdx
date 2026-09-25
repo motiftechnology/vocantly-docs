@@ -1,6 +1,6 @@
 ---
 title: "SDK Installation"
-description: "Install and set up the ChaterAfrika JavaScript SDK"
+description: "Install and set up the Vocantly JavaScript SDK"
 ---
 
 ## Installation
@@ -8,21 +8,21 @@ description: "Install and set up the ChaterAfrika JavaScript SDK"
 ### NPM
 
 ```bash
-npm install @chaterafrikang/sdk
+npm install @vocantly/sdk
 ```
 
-For **testing** (beta): `npm install @chaterafrikang/sdk@beta`
+For **testing** (beta): `npm install @vocantly/sdk@beta`
 
 ### Yarn
 
 ```bash
-yarn add @chaterafrikang/sdk
+yarn add @vocantly/sdk
 ```
 
 ### PNPM
 
 ```bash
-pnpm add @chaterafrikang/sdk
+pnpm add @vocantly/sdk
 ```
 
 ## Requirements
@@ -35,11 +35,11 @@ pnpm add @chaterafrikang/sdk
 ### Browser / React / Vue / etc.
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
 // token from your backend (POST /apps/:id/tokens)—never keys
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
   token,
   debug: true
 });
@@ -52,10 +52,10 @@ await client.connect();
 For Node.js, the SDK uses the native WebSocket when available:
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
   token, // from your backend
   debug: true
 });
@@ -72,7 +72,7 @@ interface ClientConfig {
   token: string;              // SDK authentication token
 
   // Optional: required for list() and fetchMessages() (inbox)
-  apiUrl?: string;            // REST API base, e.g. 'https://dev.chaterafrika.com/api/v1'
+  apiUrl?: string;            // REST API base, e.g. 'https://dev.vocantly.com/api/v1'
 
   // REST auth: use ONE of (token), (apiKey + apiSecret), or getRestHeaders
   apiKey?: string;            // App public key (dev only; do not expose in production)
@@ -89,8 +89,8 @@ interface ClientConfig {
 ### Example: WebSocket only (no inbox)
 
 ```typescript
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
   token, // from your backend
   debug: process.env.NODE_ENV === 'development',
 });
@@ -102,21 +102,21 @@ await client.connect();
 
 ```typescript
 // Option A: Bearer token only (recommended for frontend)
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
-  apiUrl: 'https://dev.chaterafrika.com/api/v1',
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
+  apiUrl: 'https://dev.vocantly.com/api/v1',
   token, // same token used for WebSocket; REST calls use Authorization: Bearer <token>
   debug: true,
 });
 // client.conversations.list() and conversation.fetchMessages() use the token
 
 // Option B: Backend proxy (production — no keys in client)
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
-  apiUrl: 'https://your-api.com/chatafrika', // your backend
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
+  apiUrl: 'https://your-api.com/vocantly', // your backend
   token,
   getRestHeaders: async () => {
-    const res = await fetch('/api/chatafrika-headers', { credentials: 'include' });
+    const res = await fetch('/api/vocantly-headers', { credentials: 'include' });
     return res.json(); // { 'Authorization': 'Bearer ...', 'X-Api-Key': '...', etc. }
   },
 });
@@ -129,7 +129,7 @@ Your **backend** issues SDK tokens via `POST /api/v1/apps/:appId/tokens`. Your *
 **Example (backend, API key, dev):**
 
 ```bash
-curl -X POST https://dev.chaterafrika.com/api/v1/apps/YOUR_APP_ID/tokens \
+curl -X POST https://dev.vocantly.com/api/v1/apps/YOUR_APP_ID/tokens \
   -H "Content-Type: application/json" \
   -H "X-Api-Key: pk_xxxxx" \
   -H "X-Api-Secret: sk_xxxxx" \
@@ -141,10 +141,10 @@ curl -X POST https://dev.chaterafrika.com/api/v1/apps/YOUR_APP_ID/tokens \
 ## Verifying Installation
 
 ```typescript
-import { ChatAfrika, ConnectionState } from '@chaterafrikang/sdk';
+import { Vocantly, ConnectionState } from '@vocantly/sdk';
 
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
   token // from your backend
 });
 
@@ -172,15 +172,15 @@ try {
 
 ```tsx
 import { useEffect, useState } from 'react';
-import { ChatAfrika, ConnectionState } from '@chaterafrikang/sdk';
+import { Vocantly, ConnectionState } from '@vocantly/sdk';
 
-function useChatAfrika(token: string) {
-  const [client, setClient] = useState<ChatAfrika | null>(null);
+function useVocantly(token: string) {
+  const [client, setClient] = useState<Vocantly | null>(null);
   const [state, setState] = useState<ConnectionState>(ConnectionState.DISCONNECTED);
 
   useEffect(() => {
-    const chatClient = new ChatAfrika({
-      wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+    const chatClient = new Vocantly({
+      wsUrl: 'wss://ws.dev.vocantly.com/ws',
       token,
       debug: true
     });
@@ -200,7 +200,7 @@ function useChatAfrika(token: string) {
 
 // Usage
 function ChatComponent({ token }) {
-  const { client, state } = useChatAfrika(token);
+  const { client, state } = useVocantly(token);
 
   if (state !== ConnectionState.CONNECTED) {
     return <div>Connecting...</div>;
@@ -215,16 +215,16 @@ function ChatComponent({ token }) {
 ```vue
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
-import { ChatAfrika, ConnectionState } from '@chaterafrikang/sdk';
+import { Vocantly, ConnectionState } from '@vocantly/sdk';
 
 const props = defineProps<{ token: string }>();
 
-const client = ref<ChatAfrika | null>(null);
+const client = ref<Vocantly | null>(null);
 const state = ref<ConnectionState>(ConnectionState.DISCONNECTED);
 
 onMounted(async () => {
-  client.value = new ChatAfrika({
-    wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+  client.value = new Vocantly({
+    wsUrl: 'wss://ws.dev.vocantly.com/ws',
     token: props.token,
     debug: true
   });

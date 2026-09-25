@@ -3,7 +3,7 @@ title: "Implementation Guide (Backend to Frontend)"
 description: "End-to-end integration: backend creates conversations and issues tokens; frontend uses the SDK with token only."
 ---
 
-This guide shows how to integrate the **ChatAfrika SDK** (`@chaterafrikang/sdk`) in your app using a **backend-for-token** pattern: the backend creates conversations and issues SDK tokens; the frontend uses the token only (no API keys on the client).
+This guide shows how to integrate the **Vocantly SDK** (`@vocantly/sdk`) in your app using a **backend-for-token** pattern: the backend creates conversations and issues SDK tokens; the frontend uses the token only (no API keys on the client).
 
 ## Architecture overview
 
@@ -16,11 +16,11 @@ This guide shows how to integrate the **ChatAfrika SDK** (`@chaterafrikang/sdk`)
        │  WebSocket + REST (with token)                           │  REST (API keys)
        ▼                                                         ▼
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                    ChatAfrika (WebSocket + API)                           │
+│                    Vocantly (WebSocket + API)                           │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-- **Backend:** Uses ChatAfrika API keys to create external conversations and issue short-lived SDK tokens. Never exposes API keys to the frontend.
+- **Backend:** Uses Vocantly API keys to create external conversations and issue short-lived SDK tokens. Never exposes API keys to the frontend.
 - **Frontend:** Instantiates the SDK with `token` + `wsUrl` + `apiUrl`; connects, joins conversations, and sends/receives messages. No API keys on the client.
 
 ## 1. Backend
@@ -28,31 +28,31 @@ This guide shows how to integrate the **ChatAfrika SDK** (`@chaterafrikang/sdk`)
 ### 1.1 Environment variables
 
 ```env
-CHATAFRIKA_API_URL=https://dev.chaterafrika.com/api/v1
-CHATAFRIKA_APP_ID=your-app-uuid
-CHATAFRIKA_PK=your-public-key
-CHATAFRIKA_SK=your-secret-key
+VOCANTLY_API_URL=https://dev.vocantly.com/api/v1
+VOCANTLY_APP_ID=your-app-uuid
+VOCANTLY_PK=your-public-key
+VOCANTLY_SK=your-secret-key
 ```
 
-### 1.2 ChatAfrika service (Node.js example)
+### 1.2 Vocantly service (Node.js example)
 
-Your backend calls the ChatAfrika REST API with API keys to create conversations and issue tokens.
+Your backend calls the Vocantly REST API with API keys to create conversations and issue tokens.
 
 ```javascript
-// services/chatafrika.js
+// services/vocantly.js
 import axios from 'axios';
 
-const API_URL = process.env.CHATAFRIKA_API_URL || 'https://dev.chaterafrika.com/api/v1';
-const APP_ID = process.env.CHATAFRIKA_APP_ID;
-const PK = process.env.CHATAFRIKA_PK;
-const SK = process.env.CHATAFRIKA_SK;
+const API_URL = process.env.VOCANTLY_API_URL || 'https://dev.vocantly.com/api/v1';
+const APP_ID = process.env.VOCANTLY_APP_ID;
+const PK = process.env.VOCANTLY_PK;
+const SK = process.env.VOCANTLY_SK;
 
 /**
  * Create an EXTERNAL conversation. Idempotent by external_id.
  * Use a stable external_id (e.g. sorted user ids) so the same conversation is reused.
  */
 export async function createExternalConversation(externalId, participants) {
-  if (!PK || !SK) throw new Error('CHATAFRIKA_PK and CHATAFRIKA_SK required');
+  if (!PK || !SK) throw new Error('VOCANTLY_PK and VOCANTLY_SK required');
   const { data } = await axios.post(
     `${API_URL}/conversations/external`,
     { external_id: externalId, participants },
@@ -72,7 +72,7 @@ export async function createExternalConversation(externalId, participants) {
  * Issue an SDK token for a user. The frontend will use this token to connect.
  */
 export async function issueSdkToken(external_user_id, name, email) {
-  if (!APP_ID || !PK || !SK) throw new Error('ChatAfrika app credentials missing');
+  if (!APP_ID || !PK || !SK) throw new Error('Vocantly app credentials missing');
   const { data } = await axios.post(
     `${API_URL}/apps/${APP_ID}/tokens`,
     { external_user_id, name, email: email || undefined },
@@ -144,7 +144,7 @@ router.post('/start', authMiddleware, async (req, res) => {
 ### 2.1 Install the SDK
 
 ```bash
-npm install @chaterafrikang/sdk
+npm install @vocantly/sdk
 ```
 
 ### 2.2 Config (WS + API URLs)
@@ -153,11 +153,11 @@ Point the SDK at the same environment as your backend (e.g. dev).
 
 ```javascript
 // config.js
-const defaultWsUrl = 'wss://ws.dev.chaterafrika.com/ws';
-const defaultApiUrl = 'https://dev.chaterafrika.com/api/v1';
+const defaultWsUrl = 'wss://ws.dev.vocantly.com/ws';
+const defaultApiUrl = 'https://dev.vocantly.com/api/v1';
 
-export const WS_URL = import.meta.env.VITE_CHATAFRIKA_WS_URL || defaultWsUrl;
-export const API_URL = import.meta.env.VITE_CHATAFRIKA_API_URL || defaultApiUrl;
+export const WS_URL = import.meta.env.VITE_VOCANTLY_WS_URL || defaultWsUrl;
+export const API_URL = import.meta.env.VITE_VOCANTLY_API_URL || defaultApiUrl;
 ```
 
 ### 2.3 Getting a token and opening a chat
@@ -186,14 +186,14 @@ navigate(`/chat/${otherUserId}`, {
 Use one **token** and one **conversationId** per chat screen (from your backend or inbox).
 
 ```javascript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 import { WS_URL, API_URL } from './config';
 
 // token, conversationId (cid), current user id and other display name come from your app state/route
 const cid = state.conversation_id || routeConversationId;
 const currentUserId = String(user?.id ?? user?._id ?? '').trim();
 
-const client = new ChatAfrika({
+const client = new Vocantly({
   wsUrl: WS_URL,
   apiUrl: API_URL,
   token,
@@ -288,7 +288,7 @@ No API keys on the frontend. Get a token from your backend, then use the SDK to 
 
 ```javascript
 const { token } = await api('/chat/token');
-const client = new ChatAfrika({ apiUrl: API_URL, token });
+const client = new Vocantly({ apiUrl: API_URL, token });
 const { conversations } = await client.conversations.list({ limit: 50 });
 // Then navigate to chat with conversation id and token in state
 ```
@@ -297,8 +297,8 @@ const { conversations } = await client.conversations.list({ limit: 50 });
 
 | Topic | Recommendation |
 |-------|----------------|
-| **API keys** | Never expose `CHATAFRIKA_PK` / `CHATAFRIKA_SK` (or `APP_ID` if secret) on the frontend. Issue short-lived tokens from the backend. |
-| **Token** | Each chat session (or inbox load) gets a token from your backend. Pass it into `new ChatAfrika({ token, wsUrl, apiUrl })`. |
+| **API keys** | Never expose `VOCANTLY_PK` / `VOCANTLY_SK` (or `APP_ID` if secret) on the frontend. Issue short-lived tokens from the backend. |
+| **Token** | Each chat session (or inbox load) gets a token from your backend. Pass it into `new Vocantly({ token, wsUrl, apiUrl })`. |
 | **Conversation id** | Create or resolve conversations on the backend (external API). Send `conversation_id` to the frontend so it can `join(cid)` and `get(cid)`. |
 | **User identity** | Use a stable `external_user_id` (e.g. your DB user id) when creating conversations and issuing tokens. Use the same value to compute `self` (e.g. `msg.sender_id === currentUserId`). |
 | **Message dedupe** | **Dedupe in the frontend:** when handling `convo.on('message')`, only append if `prev.some((m) => m.id === id)` is false. This avoids duplicate keys and duplicate bubbles if the SDK emits the same message twice. |
@@ -306,7 +306,7 @@ const { conversations } = await client.conversations.list({ limit: 50 });
 
 ## 4. Checklist
 
-- [ ] Backend: env vars set (`CHATAFRIKA_APP_ID`, `CHATAFRIKA_PK`, `CHATAFRIKA_SK`).
+- [ ] Backend: env vars set (`VOCANTLY_APP_ID`, `VOCANTLY_PK`, `VOCANTLY_SK`).
 - [ ] Backend: endpoint to issue token (e.g. `GET /api/chat/token`).
 - [ ] Backend: endpoint to create/start conversation and return token + `conversation_id` (e.g. `POST /api/chat/start`).
 - [ ] Frontend: config with `WS_URL` and `API_URL` (same env as backend).

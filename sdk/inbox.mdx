@@ -1,6 +1,6 @@
 ---
 title: "SDK Inbox & message history"
-description: "List conversations and fetch message history with the ChaterAfrika SDK"
+description: "List conversations and fetch message history with the Vocantly SDK"
 ---
 
 ## Overview
@@ -48,9 +48,9 @@ const { conversations, pagination } = await client.conversations.list({
 ### Example: build an inbox list
 
 ```typescript
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
-  apiUrl: 'https://dev.chaterafrika.com/api/v1',
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
+  apiUrl: 'https://dev.vocantly.com/api/v1',
   token, // from your backend
 });
 

@@ -5,7 +5,7 @@ api: "POST /api/v1/conversations/external"
 
 ## Overview
 
-Create an **EXTERNAL** conversation using **API keys only**—no dashboard login. Use this from your backend (e.g. Node, Laravel, Django) when integrating ChatAfrika into your app. Same credentials you use for [Issue SDK Token](/api-reference/apps/issue-token): **X-Api-Key** and **X-Api-Secret**.
+Create an **EXTERNAL** conversation using **API keys only**—no dashboard login. Use this from your backend (e.g. Node, Laravel, Django) when integrating Vocantly into your app. Same credentials you use for [Issue SDK Token](/api-reference/apps/issue-token): **X-Api-Key** and **X-Api-Secret**.
 
 <Note>
 **Backend-only.** Store App ID, public key, and secret key on your server. Call this endpoint when a business event occurs (e.g. order placed, appointment booked). Then call [Issue SDK Token](/api-reference/apps/issue-token) for each participant and return `token` + `conversation_id` to your frontend.
@@ -13,7 +13,7 @@ Create an **EXTERNAL** conversation using **API keys only**—no dashboard login
 
 ## When to Use This Endpoint
 
-- You are building a **backend** that integrates ChatAfrika (SDK, external chat).
+- You are building a **backend** that integrates Vocantly (SDK, external chat).
 - You want to **create conversations** without using dashboard login (JWT).
 - You already have an **App** and its **public key** + **secret key** from the dashboard.
 
@@ -44,7 +44,7 @@ For **dashboard** flows (internal users, DIRECT/GROUP/SUPPORT), use [Create Conv
 ## Example Request
 
 ```bash
-curl -X POST https://dev.chaterafrika.com/api/v1/conversations/external \
+curl -X POST https://dev.vocantly.com/api/v1/conversations/external \
   -H "Content-Type: application/json" \
   -H "X-Api-Key: pk_xxxxx" \
   -H "X-Api-Secret: sk_xxxxx" \

@@ -5,14 +5,14 @@ description: "Real-time messaging, presence, and WebSocket features"
 
 ## Overview
 
-ChaterAfrika provides real-time features through WebSocket connections. The realtime service handles instant message delivery, presence tracking, typing indicators, and more.
+Vocantly provides real-time features through WebSocket connections. The realtime service handles instant message delivery, presence tracking, typing indicators, and more.
 
 ## WebSocket Connection
 
 ### Connection Endpoint
 
 ```
-wss://ws.dev.chaterafrika.com/ws
+wss://ws.dev.vocantly.com/ws
 ```
 
 ### Authentication
@@ -20,16 +20,16 @@ wss://ws.dev.chaterafrika.com/ws
 Use the **token** from your backend (never keys). Browsers use `Sec-WebSocket-Protocol`:
 
 ```typescript
-const ws = new WebSocket('wss://ws.dev.chaterafrika.com/ws', [token]);
+const ws = new WebSocket('wss://ws.dev.vocantly.com/ws', [token]);
 ```
 
 Or using the SDK:
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
   token // from your backend (POST /apps/:id/tokens)
 });
 

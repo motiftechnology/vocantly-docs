@@ -3,7 +3,7 @@ title: "Full Support Flow"
 description: "Complete flow from sign up to external app integration (e.g. Homebridge)"
 ---
 
-This guide describes the **complete customer support flow** on ChatAfrika, from company signup through to an end user (e.g. a Homebridge app user) chatting with support agents. It includes how an external app like **Homebridge** integrates.
+This guide describes the **complete customer support flow** on Vocantly, from company signup through to an end user (e.g. a Homebridge app user) chatting with support agents. It includes how an external app like **Homebridge** integrates.
 
 <CardGroup cols={2}>
   <Card title="Team & Invitations" icon="users" href="/guides/team-members/overview">
@@ -24,11 +24,11 @@ This guide describes the **complete customer support flow** on ChatAfrika, from 
 
 | Role | Description |
 |------|-------------|
-| **ChatAfrika** | The platform: NestJS API + Go realtime + dashboard + JS SDK. |
-| **Your customer (company)** | A business that signs up on ChatAfrika (e.g. **Homebridge**). They are a **tenant**. |
+| **Vocantly** | The platform: NestJS API + Go realtime + dashboard + JS SDK. |
+| **Your customer (company)** | A business that signs up on Vocantly (e.g. **Homebridge**). They are a **tenant**. |
 | **Tenant owner** | The user who registers; gets OWNER role. Can create apps, departments, invite members, and promote agents. |
 | **Agents** | Tenant users promoted to “agent”; they appear in the support inbox and reply to end users. |
-| **End user / Customer** | A person who uses the **company’s app** (e.g. Homebridge app). They do **not** sign up on ChatAfrika; they are identified by an ID from the app (e.g. `user_123`). In ChatAfrika we call them **customers** (linked by `customer_external_id` / `external_user_id`). |
+| **End user / Customer** | A person who uses the **company’s app** (e.g. Homebridge app). They do **not** sign up on Vocantly; they are identified by an ID from the app (e.g. `user_123`). In Vocantly we call them **customers** (linked by `customer_external_id` / `external_user_id`). |
 
 ## Architecture Overview
 
@@ -36,13 +36,13 @@ This guide describes the **complete customer support flow** on ChatAfrika, from 
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │  EXTERNAL APP (e.g. Homebridge)                                                  │
 │  • Owns: end users, auth, product logic                                          │
-│  • Backend: creates support conversations, issues SDK tokens (ChatAfrika API)    │
-│  • Frontend: embeds ChatAfrika SDK; user gets token + conversation_id            │
+│  • Backend: creates support conversations, issues SDK tokens (Vocantly API)    │
+│  • Frontend: embeds Vocantly SDK; user gets token + conversation_id            │
 └─────────────────────────────────────────────────────────────────────────────────┘
          │ REST (create support conv, issue token)    │ WebSocket (chat)
          ▼                                            ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│  CHATAFRIKA                                                                      │
+│  VOCANTLY                                                                      │
 │  • NestJS: auth, apps, conversations, support inbox, persistence                 │
 │  • Go Realtime: WebSocket, rooms, presence, typing; persists via Node            │
 │  • Dashboard: agents see support inbox, reply in MessageThread                   │
@@ -50,9 +50,9 @@ This guide describes the **complete customer support flow** on ChatAfrika, from 
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-**Support conversation** = one thread per “contact support” (or per ticket). Created by the external app’s backend, then the end user joins via SDK and agents reply from the ChatAfrika dashboard.
+**Support conversation** = one thread per “contact support” (or per ticket). Created by the external app’s backend, then the end user joins via SDK and agents reply from the Vocantly dashboard.
 
-## Phase 1: Company Sign Up on ChatAfrika
+## Phase 1: Company Sign Up on Vocantly
 
 **Who:** The company (e.g. Homebridge) that will offer support.
 
@@ -62,7 +62,7 @@ This guide describes the **complete customer support flow** on ChatAfrika, from 
 
 ## Phase 2: App and Support Setup
 
-**Who:** Owner (or Admin) in the ChatAfrika dashboard.
+**Who:** Owner (or Admin) in the Vocantly dashboard.
 
 ### Create an app
 
@@ -88,10 +88,10 @@ This guide describes the **complete customer support flow** on ChatAfrika, from 
 
 ## Phase 3: External App (e.g. Homebridge) Integration
 
-- **Backend:** Talks to ChatAfrika with **API key** (and optionally JWT for conversation create).
-- **Frontend:** Gets **token** and **conversation_id** from their backend and uses the **ChatAfrika JS SDK**.
+- **Backend:** Talks to Vocantly with **API key** (and optionally JWT for conversation create).
+- **Frontend:** Gets **token** and **conversation_id** from their backend and uses the **Vocantly JS SDK**.
 
-**What Homebridge stores (backend only):** ChatAfrika App ID, public key (pk_…), secret key (sk_…). Never expose these in the frontend.
+**What Homebridge stores (backend only):** Vocantly App ID, public key (pk_…), secret key (sk_…). Never expose these in the frontend.
 
 **End-user identity:** Homebridge uses a stable ID (e.g. `user_123`) for each user. This ID is used as **customer_external_id** when creating a support conversation and as **external_user_id** when issuing the SDK token. **They must match.**
 
@@ -133,10 +133,10 @@ Expose an endpoint that creates the support conversation (if new), issues the to
 ### Homebridge frontend: open chat with SDK
 
 ```typescript
-import { ChatAfrika } from '@chatafrika/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
-const sdk = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+const sdk = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
   token,
   debug: true,
 });
@@ -151,7 +151,7 @@ convo.sendMessage('Hi, I need help with my payment schedule.');
 
 ## Phase 5: Agent Handles the Conversation
 
-- **Agent logs in** to the ChatAfrika dashboard with `POST /api/v1/auth/login`.
+- **Agent logs in** to the Vocantly dashboard with `POST /api/v1/auth/login`.
 - **Support inbox:** `GET /api/v1/support/inbox` — list of support conversations (queued, assigned, active, closed).
 - **Assign / accept:** `GET /api/v1/support/queue`, `POST /api/v1/support/:conversationId/assign`, `POST /api/v1/support/:conversationId/accept`.
 - **Chat:** Agent opens the conversation in the dashboard; messages flow over the same WebSocket; end user sees replies in the app via the SDK.
@@ -185,18 +185,18 @@ convo.sendMessage('Hi, I need help with my payment schedule.');
 | Get invitation by token | GET | `/api/v1/invitations/by-token?token=...` | — |
 | Accept invitation | POST | `/api/v1/invitations/accept` | Optional JWT |
 
-Base URL (example): `https://dev.chaterafrika.com` (API: `https://dev.chaterafrika.com/api/v1`, WebSocket: `wss://ws.dev.chaterafrika.com/ws`).
+Base URL (example): `https://dev.vocantly.com` (API: `https://dev.vocantly.com/api/v1`, WebSocket: `wss://ws.dev.vocantly.com/ws`).
 
 ## Limitations and Notes
 
 - **Invite flow:** OWNER/ADMIN invite by email; invitee accepts via link (log in and accept, or create account with token + password + name). Then they can be promoted to agent.
 - **Support conversation create:** Currently JWT-only. For full customer linking, the creating context may need `app_id` (future: API-key-based create-support endpoint).
 - **Idempotency:** For “one open support conversation per user,” implement your own logic (e.g. store `conversation_id` per user and reuse until closed).
-- **Dashboard:** The ChatAfrika dashboard is the agent UI. External apps only embed the SDK for the **end user** chat.
+- **Dashboard:** The Vocantly dashboard is the agent UI. External apps only embed the SDK for the **end user** chat.
 
 ## Summary: Homebridge Integration Checklist
 
-1. **ChatAfrika:** Sign up → create app → create departments (optional) → **invite team members** → invitees accept via email link → **promote** users to agents.
+1. **Vocantly:** Sign up → create app → create departments (optional) → **invite team members** → invitees accept via email link → **promote** users to agents.
 2. **Homebridge backend:** Store App ID + keys; create support conversation (JWT); issue token; expose endpoint that returns `{ token, conversation_id }`.
 3. **Homebridge frontend:** Use SDK; on “Contact support,” get `token` + `conversation_id` from backend, then `connect()` → `join(conversationId)` → `sendMessage` / `on('message')`.
-4. **Agents:** Use ChatAfrika dashboard to open support inbox, assign/accept, reply, and close conversations.
+4. **Agents:** Use Vocantly dashboard to open support inbox, assign/accept, reply, and close conversations.

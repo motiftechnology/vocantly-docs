@@ -1,15 +1,15 @@
 ---
 title: "Quick Start"
-description: "Get started with ChaterAfrika in minutes"
+description: "Get started with Vocantly in minutes"
 ---
 
 ## Overview
 
-ChaterAfrika is a multi-tenant chat and customer support platform that provides real-time messaging, AI-powered bots, and comprehensive support features. This guide will help you integrate ChaterAfrika into your application.
+Vocantly is a multi-tenant chat and customer support platform that provides real-time messaging, AI-powered bots, and comprehensive support features. This guide will help you integrate Vocantly into your application.
 
 <CardGroup cols={2}>
   <Card title="JavaScript SDK" icon="code" href="#javascript-sdk">
-    Integrate ChaterAfrika into your app
+    Integrate Vocantly into your app
   </Card>
   <Card title="API Reference" icon="terminal" href="/api-reference/introduction">
     Explore REST API endpoints
@@ -26,32 +26,32 @@ ChaterAfrika is a multi-tenant chat and customer support platform that provides 
 
 Before you begin, you'll need:
 
-- A ChaterAfrika account (sign up or contact [support@chaterafrika.com](mailto:support@chaterafrika.com))
+- A Vocantly account (sign up or contact [support@vocantly.com](mailto:support@vocantly.com))
 - An **App** (create one in the dashboard). Store **App ID**, **public key**, and **secret key** on your **backend** only.
 - A modern web browser or Node.js environment
 
 ## JavaScript SDK
 
-The easiest way to integrate ChaterAfrika into your application is using our JavaScript SDK.
+The easiest way to integrate Vocantly into your application is using our JavaScript SDK.
 
 ### Installation
 
 ```bash
-npm install @chaterafrikang/sdk
+npm install @vocantly/sdk
 ```
 
-For **testing** (beta): `npm install @chaterafrikang/sdk@beta`
+For **testing** (beta): `npm install @vocantly/sdk@beta`
 
 ### Basic Setup
 
 Your **backend** issues an SDK token via `POST /api/v1/apps/:appId/tokens` (JWT or `X-Api-Key` + `X-Api-Secret`). Your **frontend** receives only the **token**—never keys.
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
 // Token from your backend—never use keys in the frontend
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
   token
 });
 
@@ -61,9 +61,9 @@ await client.connect();
 **Optional (inbox):** To list conversations and fetch message history, add `apiUrl`. With the same token, the SDK will call `GET /sdk/conversations` and `GET /sdk/conversations/:id/messages` using Bearer auth.
 
 ```typescript
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
-  apiUrl: 'https://dev.chaterafrika.com/api/v1',
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
+  apiUrl: 'https://dev.vocantly.com/api/v1',
   token
 });
 await client.connect();
@@ -150,14 +150,14 @@ client.on('presence', (event) => {
 ### Complete Example
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
 async function initializeChat() {
   // Token from your backend (POST /apps/:id/tokens)
   const token = await fetch('/api/sdk-token', { credentials: 'include' }).then(r => r.json()).then(d => d.token);
 
-  const client = new ChatAfrika({
-    wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+  const client = new Vocantly({
+    wsUrl: 'wss://ws.dev.vocantly.com/ws',
     token,
     debug: true
   });
@@ -169,7 +169,7 @@ async function initializeChat() {
 
   // Connect to WebSocket
   await client.connect();
-  console.log('Connected to ChaterAfrika');
+  console.log('Connected to Vocantly');
 
   // Join conversation
   const conversationId = 'your-conversation-id';
@@ -197,7 +197,7 @@ async function initializeChat() {
   });
 
   // Send a message
-  conversation.sendMessage('Hello from ChaterAfrika!');
+  conversation.sendMessage('Hello from Vocantly!');
 
   return client;
 }
@@ -213,7 +213,7 @@ Use the REST API for reading data and managing resources. **Dashboard** access u
 ### Dashboard authentication (login)
 
 ```bash
-curl -X POST https://dev.chaterafrika.com/api/v1/auth/login \
+curl -X POST https://dev.vocantly.com/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "your-email@example.com",
@@ -244,11 +244,11 @@ Use the **access token** in subsequent requests:
 
 ```bash
 # Get conversations
-curl https://dev.chaterafrika.com/api/v1/conversations \
+curl https://dev.vocantly.com/api/v1/conversations \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 
 # Get messages for a conversation
-curl https://dev.chaterafrika.com/api/v1/conversations/{conversationId}/messages \
+curl https://dev.vocantly.com/api/v1/conversations/{conversationId}/messages \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -265,7 +265,7 @@ Use the **SDK** (recommended) or connect manually. The **token** comes from your
 await client.connect();
 
 // Or manually (browsers: use Sec-WebSocket-Protocol)
-const ws = new WebSocket('wss://ws.dev.chaterafrika.com/ws', [token]);
+const ws = new WebSocket('wss://ws.dev.vocantly.com/ws', [token]);
 ws.onopen = () => {
   ws.send(JSON.stringify({ type: 'join', conversation_id: 'conversation-id' }));
 };
@@ -298,13 +298,13 @@ ws.onmessage = (e) => console.log(JSON.parse(e.data));
   <Accordion title="How do I handle errors?">
     The SDK provides error handling. Check the [SDK documentation](/sdk/overview) for error handling patterns.
   </Accordion>
-  <Accordion title="Can I use ChaterAfrika in a mobile app?">
+  <Accordion title="Can I use Vocantly in a mobile app?">
     Yes! The SDK works in React Native and other JavaScript environments. Check the [SDK documentation](/sdk/overview) for platform-specific guides.
   </Accordion>
 </AccordionGroup>
 
 ## Support
 
-- 📧 Email: [support@chaterafrika.com](mailto:support@chaterafrika.com)
+- 📧 Email: [support@vocantly.com](mailto:support@vocantly.com)
 - 📚 Documentation: Browse our guides and API reference
 - 💬 Questions: Contact our support team

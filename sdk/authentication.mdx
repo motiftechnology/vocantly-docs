@@ -1,11 +1,11 @@
 ---
 title: "SDK Authentication"
-description: "Authentication flow for the ChaterAfrika SDK"
+description: "Authentication flow for the Vocantly SDK"
 ---
 
 ## Overview
 
-The ChaterAfrika SDK uses token-based authentication. You need an SDK token to connect to the WebSocket server.
+The Vocantly SDK uses token-based authentication. You need an SDK token to connect to the WebSocket server.
 
 <Note>
   New to how tokens work? Read [Authentication & tokens](/guides/authentication) first — it
@@ -37,7 +37,7 @@ Your **backend** issues tokens via `POST /api/v1/apps/:appId/tokens`.
 ### Option A: API key (server-to-server)
 
 ```bash
-curl -X POST https://dev.chaterafrika.com/api/v1/apps/YOUR_APP_ID/tokens \
+curl -X POST https://dev.vocantly.com/api/v1/apps/YOUR_APP_ID/tokens \
   -H "Content-Type: application/json" \
   -H "X-Api-Key: pk_xxxxx" \
   -H "X-Api-Secret: sk_xxxxx" \
@@ -51,7 +51,7 @@ curl -X POST https://dev.chaterafrika.com/api/v1/apps/YOUR_APP_ID/tokens \
 ### Option B: JWT (dashboard user)
 
 ```bash
-curl -X POST https://dev.chaterafrika.com/api/v1/apps/YOUR_APP_ID/tokens \
+curl -X POST https://dev.vocantly.com/api/v1/apps/YOUR_APP_ID/tokens \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
   -d '{
@@ -65,11 +65,11 @@ curl -X POST https://dev.chaterafrika.com/api/v1/apps/YOUR_APP_ID/tokens \
 ## Initialize SDK (Frontend)
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
 // token from your backend—never keys
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
   token
 });
 
@@ -140,12 +140,12 @@ Your backend calls `POST /apps/:id/tokens` (JWT or API key), then returns the to
 app.post('/api/sdk-token', async (req, res) => {
   const user = await verifySession(req); // your auth
   
-  const r = await fetch(`https://dev.chaterafrika.com/api/v1/apps/${process.env.APP_ID}/tokens`, {
+  const r = await fetch(`https://dev.vocantly.com/api/v1/apps/${process.env.APP_ID}/tokens`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Api-Key': process.env.CHATAFRIKA_PK,
-      'X-Api-Secret': process.env.CHATAFRIKA_SK
+      'X-Api-Key': process.env.VOCANTLY_PK,
+      'X-Api-Secret': process.env.VOCANTLY_SK
     },
     body: JSON.stringify({
       external_user_id: user.id,
@@ -159,7 +159,7 @@ app.post('/api/sdk-token', async (req, res) => {
 
 // Frontend: token only, never keys
 const { token } = await fetch('/api/sdk-token', { credentials: 'include' }).then(r => r.json());
-const client = new ChatAfrika({ wsUrl: 'wss://ws.dev.chaterafrika.com/ws', token });
+const client = new Vocantly({ wsUrl: 'wss://ws.dev.vocantly.com/ws', token });
 await client.connect();
 ```
 

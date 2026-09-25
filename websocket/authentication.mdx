@@ -1,6 +1,6 @@
 ---
 title: "WebSocket Authentication"
-description: "Authentication for ChaterAfrika WebSocket connections"
+description: "Authentication for Vocantly WebSocket connections"
 ---
 
 ## Overview
@@ -20,7 +20,7 @@ WebSocket connections require an SDK token for authentication. The token is vali
 Browsers cannot set custom headers on WebSocket. Pass the token as a subprotocol (from your backend):
 
 ```javascript
-const ws = new WebSocket('wss://ws.dev.chaterafrika.com/ws', [token]);
+const ws = new WebSocket('wss://ws.dev.vocantly.com/ws', [token]);
 ```
 
 ### Using Authorization Header (Node.js)
@@ -28,7 +28,7 @@ const ws = new WebSocket('wss://ws.dev.chaterafrika.com/ws', [token]);
 When using a WebSocket client that supports custom headers:
 
 ```javascript
-const ws = new WebSocket('wss://ws.dev.chaterafrika.com/ws', {
+const ws = new WebSocket('wss://ws.dev.vocantly.com/ws', {
   headers: { 'Authorization': `Bearer ${token}` }
 });
 ```
@@ -36,7 +36,7 @@ const ws = new WebSocket('wss://ws.dev.chaterafrika.com/ws', {
 ### Using Query Parameter
 
 ```javascript
-const ws = new WebSocket(`wss://ws.dev.chaterafrika.com/ws?token=${token}`);
+const ws = new WebSocket(`wss://ws.dev.vocantly.com/ws?token=${token}`);
 ```
 
 ## Token Validation
@@ -81,7 +81,7 @@ Your **backend** issues tokens via `POST /api/v1/apps/:appId/tokens`. See [Issue
 **API key (server-to-server):**
 
 ```bash
-curl -X POST https://dev.chaterafrika.com/api/v1/apps/YOUR_APP_ID/tokens \
+curl -X POST https://dev.vocantly.com/api/v1/apps/YOUR_APP_ID/tokens \
   -H "Content-Type: application/json" \
   -H "X-Api-Key: pk_xxxxx" \
   -H "X-Api-Secret: sk_xxxxx" \
@@ -124,7 +124,7 @@ class WebSocketManager {
   private refreshTimer: NodeJS.Timeout | null = null;
 
   async connect(token: string) {
-    this.ws = new WebSocket('wss://ws.dev.chaterafrika.com/ws', {
+    this.ws = new WebSocket('wss://ws.dev.vocantly.com/ws', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
 
@@ -173,11 +173,11 @@ class WebSocketManager {
 Use the **token** from your backend only—never keys:
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
 // token from your backend (POST /apps/:id/tokens)
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
   token
 });
 

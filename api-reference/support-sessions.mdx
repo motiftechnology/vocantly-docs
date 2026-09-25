@@ -54,7 +54,7 @@ instead.
 ## Example Request
 
 ```bash
-curl -X POST https://dev.chaterafrika.com/api/v1/apps/YOUR_APP_ID/support-sessions \
+curl -X POST https://dev.vocantly.com/api/v1/apps/YOUR_APP_ID/support-sessions \
   -H "Content-Type: application/json" \
   -H "X-Api-Key: pk_xxxxx" \
   -H "X-Api-Secret: sk_xxxxx" \
@@ -98,8 +98,8 @@ curl -X POST https://dev.chaterafrika.com/api/v1/apps/YOUR_APP_ID/support-sessio
 
 ```typescript
 // Frontend — hand token + conversationId to the widget
-ChatAfrikaWidget.init({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+VocantlyWidget.init({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
   token,
   conversationId,
 });

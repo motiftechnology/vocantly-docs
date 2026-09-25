@@ -1,18 +1,18 @@
 ---
 title: "WebSocket Overview"
-description: "Complete guide to ChaterAfrika WebSocket protocol"
+description: "Complete guide to Vocantly WebSocket protocol"
 ---
 
 ## Overview
 
-ChaterAfrika uses WebSocket for real-time bidirectional communication. All real-time features (messaging, presence, typing) are delivered through WebSocket connections.
+Vocantly uses WebSocket for real-time bidirectional communication. All real-time features (messaging, presence, typing) are delivered through WebSocket connections.
 
 ## Connection
 
 ### Endpoint
 
 ```
-wss://ws.dev.chaterafrika.com/ws
+wss://ws.dev.vocantly.com/ws
 ```
 
 ### Authentication
@@ -20,13 +20,13 @@ wss://ws.dev.chaterafrika.com/ws
 Use the **token** from your backend (POST /apps/:id/tokens)—never keys. Browsers use `Sec-WebSocket-Protocol`:
 
 ```javascript
-const ws = new WebSocket('wss://ws.dev.chaterafrika.com/ws', [token]);
+const ws = new WebSocket('wss://ws.dev.vocantly.com/ws', [token]);
 ```
 
 Node.js (custom headers):
 
 ```javascript
-const ws = new WebSocket('wss://ws.dev.chaterafrika.com/ws', {
+const ws = new WebSocket('wss://ws.dev.vocantly.com/ws', {
   headers: { 'Authorization': `Bearer ${token}` }
 });
 ```
@@ -197,7 +197,7 @@ interface ServerMessage {
 
 ```javascript
 // token from your backend
-const ws = new WebSocket('wss://ws.dev.chaterafrika.com/ws', [token]);
+const ws = new WebSocket('wss://ws.dev.vocantly.com/ws', [token]);
 
 ws.onopen = () => {
   console.log('Connected!');

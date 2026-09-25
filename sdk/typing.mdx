@@ -1,6 +1,6 @@
 ---
 title: "SDK Typing Indicators"
-description: "Typing indicators with the ChaterAfrika SDK"
+description: "Typing indicators with the Vocantly SDK"
 ---
 
 ## Overview
@@ -151,7 +151,7 @@ form.addEventListener('submit', () => typing.handleSend());
 
 ```tsx
 import { useState, useEffect, useCallback } from 'react';
-import { Conversation } from '@chaterafrikang/sdk';
+import { Conversation } from '@vocantly/sdk';
 
 function useTyping(conversation: Conversation) {
   const [typingUsers, setTypingUsers] = useState<string[]>([]);

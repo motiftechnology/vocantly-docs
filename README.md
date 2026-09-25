@@ -1,6 +1,6 @@
-# ChaterAfrika Documentation
+# Vocantly Documentation
 
-Welcome to the ChaterAfrika documentation repository.
+Welcome to the Vocantly documentation repository.
 
 Use the starter kit to get your docs deployed and ready to customize.
 

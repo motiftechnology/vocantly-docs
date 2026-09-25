@@ -1,9 +1,9 @@
 ---
 title: "Voice & Video Calls"
-description: "How WebRTC audio/video calls work in ChaterAfrika — signaling, ICE/TURN, and quality."
+description: "How WebRTC audio/video calls work in Vocantly — signaling, ICE/TURN, and quality."
 ---
 
-ChaterAfrika adds **peer-to-peer voice and video** to any conversation using **WebRTC**. The
+Vocantly adds **peer-to-peer voice and video** to any conversation using **WebRTC**. The
 platform brokers the signaling; media flows directly between participants (relayed through a
 TURN server when a direct path isn't possible).
 
@@ -67,7 +67,7 @@ directly, see the [Call Signaling protocol](/websocket/signaling) reference.
 You can check whether a conversation currently has a call in progress:
 
 ```bash
-curl https://dev.chaterafrika.com/api/v1/conversations/{conversationId}/active-call \
+curl https://dev.vocantly.com/api/v1/conversations/{conversationId}/active-call \
   -H "Authorization: Bearer SDK_OR_DASHBOARD_TOKEN"
 ```
 
@@ -77,7 +77,7 @@ After a call, clients can submit quality metrics (duration, packet loss, jitter,
 time) which surface in your dashboard:
 
 ```bash
-curl -X POST https://dev.chaterafrika.com/api/v1/conversations/{conversationId}/call-quality \
+curl -X POST https://dev.vocantly.com/api/v1/conversations/{conversationId}/call-quality \
   -H "Authorization: Bearer SDK_OR_DASHBOARD_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{ "duration_seconds": 142, "packets_lost_in": 3, "jitter_ms": 12, "rtt_ms": 48 }'

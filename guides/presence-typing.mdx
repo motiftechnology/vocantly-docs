@@ -1,11 +1,11 @@
 ---
 title: "Presence & Typing"
-description: "User presence and typing indicators in ChaterAfrika"
+description: "User presence and typing indicators in Vocantly"
 ---
 
 ## Overview
 
-ChaterAfrika provides real-time presence tracking and typing indicators to enhance the chat experience.
+Vocantly provides real-time presence tracking and typing indicators to enhance the chat experience.
 
 ## Presence
 
@@ -107,17 +107,17 @@ conversation.on('typing', (event) => {
 ## Complete Example
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
 class ChatWithPresenceAndTyping {
-  private client: ChatAfrika;
+  private client: Vocantly;
   private onlineUsers = new Set<string>();
   private typingUsers = new Map<string, Set<string>>();
   private typingTimeout: NodeJS.Timeout | null = null;
 
   async initialize(token: string) {
-    this.client = new ChatAfrika({
-      wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+    this.client = new Vocantly({
+      wsUrl: 'wss://ws.dev.vocantly.com/ws',
       token
     });
 

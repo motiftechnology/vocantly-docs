@@ -1,11 +1,11 @@
 ---
 title: "SDK Conversations"
-description: "Managing conversations with the ChaterAfrika SDK"
+description: "Managing conversations with the Vocantly SDK"
 ---
 
 ## Overview
 
-Conversations are the core of ChaterAfrika messaging. The SDK provides a conversation-scoped API where you join a conversation, get a `Conversation` instance, and interact with it.
+Conversations are the core of Vocantly messaging. The SDK provides a conversation-scoped API where you join a conversation, get a `Conversation` instance, and interact with it.
 
 ## Joining Conversations
 
@@ -182,7 +182,7 @@ await client.conversations.leave('conversation-id');
 ## Minimal flow
 
 ```typescript
-const client = new ChatAfrika({ wsUrl, token });
+const client = new Vocantly({ wsUrl, token });
 await client.connect();
 await client.conversations.join(conversationId);
 

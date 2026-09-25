@@ -9,7 +9,7 @@
 
 ### Essential Guides ✅ (9 pages)
 1. **Architecture Overview** - System architecture and service interactions
-2. **Quick Start** - Getting started with ChaterAfrika
+2. **Quick Start** - Getting started with Vocantly
 3. **Authentication** - Complete authentication guide
 4. **Conversations** - Conversation types and management
 5. **Messages** - Sending, receiving, and managing messages

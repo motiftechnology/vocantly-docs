@@ -10,7 +10,7 @@
 
 ### 1. Update Navigation Structure (`docs.json`)
 
-Reorganize the navigation to match ChaterAfrika's structure:
+Reorganize the navigation to match Vocantly's structure:
 
 ```json
 {

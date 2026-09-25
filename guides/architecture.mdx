@@ -1,11 +1,11 @@
 ---
 title: "Architecture Overview"
-description: "Understanding ChaterAfrika's system architecture and how services interact"
+description: "Understanding Vocantly's system architecture and how services interact"
 ---
 
 ## System Overview
 
-ChaterAfrika is a multi-tenant chat and customer support platform built with a microservices architecture. The platform consists of four main services that work together to provide real-time messaging, AI-powered bots, and comprehensive customer support features.
+Vocantly is a multi-tenant chat and customer support platform built with a microservices architecture. The platform consists of four main services that work together to provide real-time messaging, AI-powered bots, and comprehensive customer support features.
 
 <CardGroup cols={2}>
   <Card title="Backend API" icon="server">
@@ -128,7 +128,7 @@ The Realtime Service **never** writes to the database. It only publishes events 
 
 ### 3. Frontend Dashboard (Next.js)
 
-The admin dashboard for managing ChaterAfrika instances.
+The admin dashboard for managing Vocantly instances.
 
 **Responsibilities:**
 - User interface for platform management
@@ -145,7 +145,7 @@ The admin dashboard for managing ChaterAfrika instances.
 
 ### 4. JavaScript SDK
 
-Headless SDK for integrating ChaterAfrika into applications.
+Headless SDK for integrating Vocantly into applications.
 
 **Responsibilities:**
 - Client-side API integration
@@ -203,7 +203,7 @@ Headless SDK for integrating ChaterAfrika into applications.
 
 ## Multi-Tenancy
 
-ChaterAfrika is built with **tenant isolation** at its core. Each tenant has:
+Vocantly is built with **tenant isolation** at its core. Each tenant has:
 
 - **Isolated data** - All data is scoped by tenant
 - **Separate configuration** - Apps, bots, webhooks per tenant

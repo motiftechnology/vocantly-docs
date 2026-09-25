@@ -27,7 +27,7 @@ need to call it directly. See [Voice & Video Calls (SDK)](/sdk/calls).
 ## Example Request
 
 ```bash
-curl https://dev.chaterafrika.com/api/v1/apps/YOUR_APP_ID/ice-servers \
+curl https://dev.vocantly.com/api/v1/apps/YOUR_APP_ID/ice-servers \
   -H "Authorization: Bearer SDK_TOKEN"
 ```
 
@@ -46,8 +46,8 @@ curl https://dev.chaterafrika.com/api/v1/apps/YOUR_APP_ID/ice-servers \
     "iceServers": [
       { "urls": "stun:stun.l.google.com:19302" },
       {
-        "urls": ["turn:turn.chaterafrika.com:3478"],
-        "username": "chatafrika",
+        "urls": ["turn:turn.vocantly.com:3478"],
+        "username": "vocantly",
         "credential": "…"
       }
     ]

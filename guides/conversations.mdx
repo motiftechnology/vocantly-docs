@@ -1,11 +1,11 @@
 ---
 title: "Conversations"
-description: "Understanding and managing conversations in ChaterAfrika"
+description: "Understanding and managing conversations in Vocantly"
 ---
 
 ## Overview
 
-Conversations are the core unit of communication in ChaterAfrika. They support four types: **DIRECT**, **GROUP**, **SUPPORT**, and **EXTERNAL**, each with specific use cases and behaviors.
+Conversations are the core unit of communication in Vocantly. They support four types: **DIRECT**, **GROUP**, **SUPPORT**, and **EXTERNAL**, each with specific use cases and behaviors.
 
 ## Conversation Types
 
@@ -73,7 +73,7 @@ Conversations **owned by your app** (e.g. orders, appointments, tickets). Partic
 **Flow:** Your **backend** creates the conversation (see below), issues SDK tokens for each participant (`POST /apps/:id/tokens`), and returns `token` + `conversation_id` to your frontend. The **SDK** joins by `conversation_id` and sends/receives messages. No dashboard login required—use [Create EXTERNAL (API Key)](/api-reference/conversations/create-external) and [Issue SDK Token](/api-reference/apps/issue-token) with your app keys.
 
 **Inbox & history:** To show "my conversations" and load past messages without building a backend route, you can:
-- Use the **inbox client** (`@chatafrika/inbox-client` or `packages/chatafrika-inbox-client` in the repo): pass your API URL and API keys, then call `listConversations(externalUserId)` and `getMessages(conversationId, externalUserId, options)`. In production, prefer `getHeaders()` from your backend so the secret is never exposed in the frontend.
+- Use the **inbox client** (`@vocantly/inbox-client` or `packages/vocantly-inbox-client` in the repo): pass your API URL and API keys, then call `listConversations(externalUserId)` and `getMessages(conversationId, externalUserId, options)`. In production, prefer `getHeaders()` from your backend so the secret is never exposed in the frontend.
 - Or call the REST API directly: [List EXTERNAL conversations](/api-reference/conversations/list-external) and [Get EXTERNAL messages](/api-reference/conversations/get-external-messages). The SDK may also expose `sdk.conversations.list()` and `convo.fetchMessages()` that call these.
 
 ## Creating Conversations
@@ -81,7 +81,7 @@ Conversations **owned by your app** (e.g. orders, appointments, tickets). Partic
 ### Create DIRECT Conversation
 
 ```typescript
-const conversation = await fetch('https://api.chaterafrika.com/api/v1/conversations', {
+const conversation = await fetch('https://api.vocantly.com/api/v1/conversations', {
   method: 'POST',
   headers: {
     'Authorization': `Bearer ${accessToken}`,
@@ -101,7 +101,7 @@ If a DIRECT conversation already exists between the two users, the API returns t
 ### Create GROUP Conversation
 
 ```typescript
-const conversation = await fetch('https://api.chaterafrika.com/api/v1/conversations', {
+const conversation = await fetch('https://api.vocantly.com/api/v1/conversations', {
   method: 'POST',
   headers: {
     'Authorization': `Bearer ${accessToken}`,
@@ -118,7 +118,7 @@ const conversation = await fetch('https://api.chaterafrika.com/api/v1/conversati
 ### Create SUPPORT Conversation
 
 ```typescript
-const conversation = await fetch('https://api.chaterafrika.com/api/v1/conversations', {
+const conversation = await fetch('https://api.vocantly.com/api/v1/conversations', {
   method: 'POST',
   headers: {
     'Authorization': `Bearer ${accessToken}`,
@@ -140,12 +140,12 @@ Use **API keys only** (no dashboard login). Your backend calls `POST /conversati
 
 ```typescript
 // Your backend (e.g. Node, Laravel, Django)
-const conversation = await fetch('https://dev.chaterafrika.com/api/v1/conversations/external', {
+const conversation = await fetch('https://dev.vocantly.com/api/v1/conversations/external', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
-    'X-Api-Key': process.env.CHATAFRIKA_PK,
-    'X-Api-Secret': process.env.CHATAFRIKA_SK
+    'X-Api-Key': process.env.VOCANTLY_PK,
+    'X-Api-Secret': process.env.VOCANTLY_SK
   },
   body: JSON.stringify({
     external_id: 'appointment_789',
@@ -173,7 +173,7 @@ If you prefer to use dashboard JWT instead of API keys, use `POST /conversations
 ### List Conversations
 
 ```typescript
-const conversations = await fetch('https://api.chaterafrika.com/api/v1/conversations', {
+const conversations = await fetch('https://api.vocantly.com/api/v1/conversations', {
   headers: {
     'Authorization': `Bearer ${accessToken}`
   }
@@ -189,7 +189,7 @@ const conversations = await fetch('https://api.chaterafrika.com/api/v1/conversat
 
 ```typescript
 const conversation = await fetch(
-  `https://api.chaterafrika.com/api/v1/conversations/${conversationId}`,
+  `https://api.vocantly.com/api/v1/conversations/${conversationId}`,
   {
     headers: {
       'Authorization': `Bearer ${accessToken}`
@@ -202,7 +202,7 @@ const conversation = await fetch(
 
 ```typescript
 await fetch(
-  `https://api.chaterafrika.com/api/v1/conversations/${conversationId}/members`,
+  `https://api.vocantly.com/api/v1/conversations/${conversationId}/members`,
   {
     method: 'POST',
     headers: {
@@ -224,7 +224,7 @@ Only OWNER and ADMIN can add members to GROUP conversations. DIRECT conversation
 
 ```typescript
 await fetch(
-  `https://api.chaterafrika.com/api/v1/conversations/${conversationId}/members/${userId}`,
+  `https://api.vocantly.com/api/v1/conversations/${conversationId}/members/${userId}`,
   {
     method: 'DELETE',
     headers: {
@@ -248,11 +248,11 @@ Each conversation has members with roles:
 The SDK **does not create** conversations. Your **backend** creates them via `POST /conversations`. The SDK **joins** by `conversation_id` (from your backend) and sends/receives messages over WebSocket.
 
 ```typescript
-import { ChatAfrika } from '@chaterafrikang/sdk';
+import { Vocantly } from '@vocantly/sdk';
 
 // token + conversationId from your backend (e.g. after create conv + issue token)
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
   token,
   debug: true
 });

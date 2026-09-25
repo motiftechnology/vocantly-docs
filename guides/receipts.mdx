@@ -1,6 +1,6 @@
 ---
 title: "Read Receipts"
-description: "Message delivery and read receipts in ChaterAfrika"
+description: "Message delivery and read receipts in Vocantly"
 ---
 
 ## Overview
@@ -80,7 +80,7 @@ function getStatusIcon(status: string): { icon: string; color: string } {
 ## Complete Example
 
 ```typescript
-import { ChatAfrika, Message } from '@chaterafrikang/sdk';
+import { Vocantly, Message } from '@vocantly/sdk';
 
 interface MessageWithStatus {
   id: string;
@@ -90,11 +90,11 @@ interface MessageWithStatus {
 }
 
 class MessageManager {
-  private client: ChatAfrika;
+  private client: Vocantly;
   private messages: Map<string, MessageWithStatus> = new Map();
   private onUpdate: (messageId: string, message: MessageWithStatus) => void;
 
-  constructor(client: ChatAfrika, onUpdate: (id: string, msg: MessageWithStatus) => void) {
+  constructor(client: Vocantly, onUpdate: (id: string, msg: MessageWithStatus) => void) {
     this.client = client;
     this.onUpdate = onUpdate;
   }
@@ -140,8 +140,8 @@ class MessageManager {
 }
 
 // Usage
-const client = new ChatAfrika({
-  wsUrl: 'wss://ws.dev.chaterafrika.com/ws',
+const client = new Vocantly({
+  wsUrl: 'wss://ws.dev.vocantly.com/ws',
   token: 'your-token'
 });
 

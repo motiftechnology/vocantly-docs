@@ -44,7 +44,7 @@ Get **paginated message history** for an **EXTERNAL** conversation. The caller m
 ## Example: Bearer token (SDK / frontend)
 
 ```bash
-curl -X GET "https://dev.chaterafrika.com/api/v1/sdk/conversations/770e8400-e29b-41d4-a716-446655440002/messages?limit=20" \
+curl -X GET "https://dev.vocantly.com/api/v1/sdk/conversations/770e8400-e29b-41d4-a716-446655440002/messages?limit=20" \
   -H "Authorization: Bearer <SDK_TOKEN>" \
   -H "Content-Type: application/json"
 ```
@@ -52,7 +52,7 @@ curl -X GET "https://dev.chaterafrika.com/api/v1/sdk/conversations/770e8400-e29b
 ## Example: API keys (backend)
 
 ```bash
-curl -X GET "https://dev.chaterafrika.com/api/v1/sdk/conversations/770e8400-e29b-41d4-a716-446655440002/messages?external_user_id=user_123&limit=20" \
+curl -X GET "https://dev.vocantly.com/api/v1/sdk/conversations/770e8400-e29b-41d4-a716-446655440002/messages?external_user_id=user_123&limit=20" \
   -H "X-Api-Key: pk_xxxxx" \
   -H "X-Api-Secret: sk_xxxxx"
 ```
@@ -60,7 +60,7 @@ curl -X GET "https://dev.chaterafrika.com/api/v1/sdk/conversations/770e8400-e29b
 With cursor (next page):
 
 ```bash
-curl -X GET "https://dev.chaterafrika.com/api/v1/sdk/conversations/770e8400.../messages?external_user_id=user_123&cursor=2024-01-01T10:00:00.000Z&limit=20" \
+curl -X GET "https://dev.vocantly.com/api/v1/sdk/conversations/770e8400.../messages?external_user_id=user_123&cursor=2024-01-01T10:00:00.000Z&limit=20" \
   -H "X-Api-Key: pk_xxxxx" \
   -H "X-Api-Secret: sk_xxxxx"
 ```

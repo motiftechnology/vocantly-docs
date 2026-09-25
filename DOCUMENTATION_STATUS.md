@@ -1,4 +1,4 @@
-# ChaterAfrika Documentation Status
+# Vocantly Documentation Status
 
 ## ✅ Completed
 
