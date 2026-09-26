@@ -158,7 +158,7 @@ Reorganize the navigation to match Vocantly's structure:
 If you have OpenAPI/Swagger specs:
 1. Export from your NestJS backend
 2. Place in `api-reference/openapi.json`
-3. Mintlify will auto-generate API docs
+3. The docs CLI will auto-generate API docs
 
 ### 4. Add Code Examples
 
@@ -269,9 +269,9 @@ chaterAfrika-docs/
 
 ## 🔗 Useful Resources
 
-- [Mintlify Documentation](https://mintlify.com/docs)
+- [Docs CLI Documentation](https://mintlify.com/docs)
 - [MDX Guide](https://mdxjs.com/)
-- [Mintlify Components](https://mintlify.com/docs/components)
+- [Docs CLI Components](https://mintlify.com/docs/components)
 
 ## 💡 Tips
 
@@ -279,5 +279,5 @@ chaterAfrika-docs/
 2. **Use Examples**: Code examples are crucial for developer docs
 3. **Keep Updated**: Sync docs with code changes
 4. **Test Locally**: Always preview before pushing
-5. **Use Components**: Leverage Mintlify's built-in components for better UX
+5. **Use Components**: Leverage the docs CLI's built-in components for better UX
 

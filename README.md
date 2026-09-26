@@ -1,28 +1,18 @@
 # Vocantly Documentation
 
-Welcome to the Vocantly documentation repository.
+Welcome to the Vocantly documentation repository — guides, SDK reference, and API reference for building on Vocantly.
 
-Use the starter kit to get your docs deployed and ready to customize.
-
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
-
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
-
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+This site is built with the [Mint](https://www.npmjs.com/package/mint) docs CLI and self-hosted as a static export on our own infrastructure at `docs.vocantly.com`, rather than on a hosted docs platform.
 
 ## Development
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
+Install the docs CLI to preview your documentation changes locally:
 
 ```
 npm i -g mint
 ```
 
-Run the following command at the root of your documentation, where your `docs.json` is located:
+Run the following command at the root of this repository, where `docs.json` is located:
 
 ```
 mint dev
@@ -32,14 +22,19 @@ View your local preview at `http://localhost:3000`.
 
 ## Publishing changes
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+This site does not auto-deploy on push. To publish:
+
+1. Push your changes to the default branch.
+2. Run `./deploy.sh docs` from the main workspace to export a static build, strip the docs CLI's own platform branding, and sync it to the server.
+
+See `scripts/rebrand-export.py` for what that stripping step does and why.
 
 ## Need help?
 
 ### Troubleshooting
 
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
+- If your dev environment isn't running: run `mint update` to ensure you have the most recent version of the CLI.
+- If a page loads as a 404: make sure you are running in a folder with a valid `docs.json`.
 
 ### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+- [Docs CLI documentation](https://mintlify.com/docs)
