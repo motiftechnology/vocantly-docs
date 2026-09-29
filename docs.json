@@ -3,11 +3,11 @@
   "theme": "mint",
   "name": "Vocantly Documentation",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#0566EA",
+    "light": "#2E86FF",
+    "dark": "#054DB4"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "navigation": {
     "tabs": [
       {
@@ -157,8 +157,8 @@
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/vocantly-logo-dark.png",
+    "dark": "/logo/vocantly-logo-light.png"
   },
   "navbar": {
     "links": [
