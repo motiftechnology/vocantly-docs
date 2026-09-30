@@ -84,7 +84,7 @@ Webhooks allow you to receive real-time notifications about events in your Vocan
 
 **Example:**
 ```bash
-curl -X POST https://api.vocantly.com/api/v1/apps/{appId}/webhooks \
+curl -X POST https://dev.vocantly.com/api/v1/apps/{appId}/webhooks \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -220,7 +220,7 @@ Failed deliveries (non-2xx or timeout) are retried on an increasing backoff sche
 ### Viewing Deliveries
 
 ```bash
-curl https://api.vocantly.com/api/v1/apps/{appId}/webhooks/{webhookId}/deliveries \
+curl https://dev.vocantly.com/api/v1/apps/{appId}/webhooks/{webhookId}/deliveries \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
