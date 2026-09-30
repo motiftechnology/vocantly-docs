@@ -170,7 +170,7 @@
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://dashboard.vocantly.com"
+      "href": "https://dev.vocantly.com"
     }
   },
   "contextual": {

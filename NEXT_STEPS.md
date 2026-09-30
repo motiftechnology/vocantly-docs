@@ -178,7 +178,7 @@ Create example files showing:
 ## 📁 Recommended Folder Structure
 
 ```
-chaterAfrika-docs/
+vocantly-docs/
 ├── docs.json
 ├── index.mdx
 ├── quickstart.mdx
@@ -223,7 +223,7 @@ chaterAfrika-docs/
 1. **Local Development**
    ```bash
    npm i -g mint
-   cd chaterAfrika-docs
+   cd vocantly-docs
    mint dev
    ```
    View at `http://localhost:3000`
