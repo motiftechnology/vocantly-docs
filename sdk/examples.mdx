@@ -16,7 +16,7 @@ class ChatApp {
 
   async initialize(token: string) {
     this.client = new Vocantly({
-      wsUrl: 'wss://ws.dev.vocantly.com/ws',
+      wsUrl: 'wss://ws.vocantly.com/ws',
       token,
       debug: true
     });
@@ -111,7 +111,7 @@ function useVocantly(token: string) {
 
   useEffect(() => {
     const chatClient = new Vocantly({
-      wsUrl: 'wss://ws.dev.vocantly.com/ws',
+      wsUrl: 'wss://ws.vocantly.com/ws',
       token,
       debug: true
     });
@@ -255,7 +255,7 @@ import * as readline from 'readline';
 
 async function main() {
   const client = new Vocantly({
-    wsUrl: 'wss://ws.dev.vocantly.com/ws',
+    wsUrl: 'wss://ws.vocantly.com/ws',
     token: process.env.SDK_TOKEN!,
     debug: false
   });
@@ -329,7 +329,7 @@ class SupportWidget {
     this.conversationId = conversationId;
 
     this.client = new Vocantly({
-      wsUrl: 'wss://ws.dev.vocantly.com/ws',
+      wsUrl: 'wss://ws.vocantly.com/ws',
       token
     });
 
@@ -452,7 +452,7 @@ class MultiChatManager {
 
   async initialize(token: string) {
     this.client = new Vocantly({
-      wsUrl: 'wss://ws.dev.vocantly.com/ws',
+      wsUrl: 'wss://ws.vocantly.com/ws',
       token
     });
 

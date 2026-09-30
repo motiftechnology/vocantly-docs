@@ -12,7 +12,7 @@ Vocantly uses WebSocket for real-time bidirectional communication. All real-time
 ### Endpoint
 
 ```
-wss://ws.dev.vocantly.com/ws
+wss://ws.vocantly.com/ws
 ```
 
 ### Authentication
@@ -20,13 +20,13 @@ wss://ws.dev.vocantly.com/ws
 Use the **token** from your backend (POST /apps/:id/tokens)—never keys. Browsers use `Sec-WebSocket-Protocol`:
 
 ```javascript
-const ws = new WebSocket('wss://ws.dev.vocantly.com/ws', [token]);
+const ws = new WebSocket('wss://ws.vocantly.com/ws', [token]);
 ```
 
 Node.js (custom headers):
 
 ```javascript
-const ws = new WebSocket('wss://ws.dev.vocantly.com/ws', {
+const ws = new WebSocket('wss://ws.vocantly.com/ws', {
   headers: { 'Authorization': `Bearer ${token}` }
 });
 ```
@@ -197,7 +197,7 @@ interface ServerMessage {
 
 ```javascript
 // token from your backend
-const ws = new WebSocket('wss://ws.dev.vocantly.com/ws', [token]);
+const ws = new WebSocket('wss://ws.vocantly.com/ws', [token]);
 
 ws.onopen = () => {
   console.log('Connected!');

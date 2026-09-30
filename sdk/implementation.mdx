@@ -28,7 +28,7 @@ This guide shows how to integrate the **Vocantly SDK** (`@vocantly/sdk`) in your
 ### 1.1 Environment variables
 
 ```env
-VOCANTLY_API_URL=https://dev.vocantly.com/api/v1
+VOCANTLY_API_URL=https://api.vocantly.com/api/v1
 VOCANTLY_APP_ID=your-app-uuid
 VOCANTLY_PK=your-public-key
 VOCANTLY_SK=your-secret-key
@@ -42,7 +42,7 @@ Your backend calls the Vocantly REST API with API keys to create conversations a
 // services/vocantly.js
 import axios from 'axios';
 
-const API_URL = process.env.VOCANTLY_API_URL || 'https://dev.vocantly.com/api/v1';
+const API_URL = process.env.VOCANTLY_API_URL || 'https://api.vocantly.com/api/v1';
 const APP_ID = process.env.VOCANTLY_APP_ID;
 const PK = process.env.VOCANTLY_PK;
 const SK = process.env.VOCANTLY_SK;
@@ -153,8 +153,8 @@ Point the SDK at the same environment as your backend (e.g. dev).
 
 ```javascript
 // config.js
-const defaultWsUrl = 'wss://ws.dev.vocantly.com/ws';
-const defaultApiUrl = 'https://dev.vocantly.com/api/v1';
+const defaultWsUrl = 'wss://ws.vocantly.com/ws';
+const defaultApiUrl = 'https://api.vocantly.com/api/v1';
 
 export const WS_URL = import.meta.env.VITE_VOCANTLY_WS_URL || defaultWsUrl;
 export const API_URL = import.meta.env.VITE_VOCANTLY_API_URL || defaultApiUrl;

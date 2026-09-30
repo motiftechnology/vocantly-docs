@@ -136,7 +136,7 @@ Expose an endpoint that creates the support conversation (if new), issues the to
 import { Vocantly } from '@vocantly/sdk';
 
 const sdk = new Vocantly({
-  wsUrl: 'wss://ws.dev.vocantly.com/ws',
+  wsUrl: 'wss://ws.vocantly.com/ws',
   token,
   debug: true,
 });
@@ -185,7 +185,7 @@ convo.sendMessage('Hi, I need help with my payment schedule.');
 | Get invitation by token | GET | `/api/v1/invitations/by-token?token=...` | — |
 | Accept invitation | POST | `/api/v1/invitations/accept` | Optional JWT |
 
-Base URL (example): `https://dev.vocantly.com` (API: `https://dev.vocantly.com/api/v1`, WebSocket: `wss://ws.dev.vocantly.com/ws`).
+Base URL (example): `https://api.vocantly.com` (API: `https://api.vocantly.com/api/v1`, WebSocket: `wss://ws.vocantly.com/ws`).
 
 ## Limitations and Notes
 

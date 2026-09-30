@@ -81,7 +81,7 @@ Conversations **owned by your app** (e.g. orders, appointments, tickets). Partic
 ### Create DIRECT Conversation
 
 ```typescript
-const conversation = await fetch('https://dev.vocantly.com/api/v1/conversations', {
+const conversation = await fetch('https://api.vocantly.com/api/v1/conversations', {
   method: 'POST',
   headers: {
     'Authorization': `Bearer ${accessToken}`,
@@ -101,7 +101,7 @@ If a DIRECT conversation already exists between the two users, the API returns t
 ### Create GROUP Conversation
 
 ```typescript
-const conversation = await fetch('https://dev.vocantly.com/api/v1/conversations', {
+const conversation = await fetch('https://api.vocantly.com/api/v1/conversations', {
   method: 'POST',
   headers: {
     'Authorization': `Bearer ${accessToken}`,
@@ -118,7 +118,7 @@ const conversation = await fetch('https://dev.vocantly.com/api/v1/conversations'
 ### Create SUPPORT Conversation
 
 ```typescript
-const conversation = await fetch('https://dev.vocantly.com/api/v1/conversations', {
+const conversation = await fetch('https://api.vocantly.com/api/v1/conversations', {
   method: 'POST',
   headers: {
     'Authorization': `Bearer ${accessToken}`,
@@ -140,7 +140,7 @@ Use **API keys only** (no dashboard login). Your backend calls `POST /conversati
 
 ```typescript
 // Your backend (e.g. Node, Laravel, Django)
-const conversation = await fetch('https://dev.vocantly.com/api/v1/conversations/external', {
+const conversation = await fetch('https://api.vocantly.com/api/v1/conversations/external', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -173,7 +173,7 @@ If you prefer to use dashboard JWT instead of API keys, use `POST /conversations
 ### List Conversations
 
 ```typescript
-const conversations = await fetch('https://dev.vocantly.com/api/v1/conversations', {
+const conversations = await fetch('https://api.vocantly.com/api/v1/conversations', {
   headers: {
     'Authorization': `Bearer ${accessToken}`
   }
@@ -189,7 +189,7 @@ const conversations = await fetch('https://dev.vocantly.com/api/v1/conversations
 
 ```typescript
 const conversation = await fetch(
-  `https://dev.vocantly.com/api/v1/conversations/${conversationId}`,
+  `https://api.vocantly.com/api/v1/conversations/${conversationId}`,
   {
     headers: {
       'Authorization': `Bearer ${accessToken}`
@@ -202,7 +202,7 @@ const conversation = await fetch(
 
 ```typescript
 await fetch(
-  `https://dev.vocantly.com/api/v1/conversations/${conversationId}/members`,
+  `https://api.vocantly.com/api/v1/conversations/${conversationId}/members`,
   {
     method: 'POST',
     headers: {
@@ -224,7 +224,7 @@ Only OWNER and ADMIN can add members to GROUP conversations. DIRECT conversation
 
 ```typescript
 await fetch(
-  `https://dev.vocantly.com/api/v1/conversations/${conversationId}/members/${userId}`,
+  `https://api.vocantly.com/api/v1/conversations/${conversationId}/members/${userId}`,
   {
     method: 'DELETE',
     headers: {
@@ -252,7 +252,7 @@ import { Vocantly } from '@vocantly/sdk';
 
 // token + conversationId from your backend (e.g. after create conv + issue token)
 const client = new Vocantly({
-  wsUrl: 'wss://ws.dev.vocantly.com/ws',
+  wsUrl: 'wss://ws.vocantly.com/ws',
   token,
   debug: true
 });

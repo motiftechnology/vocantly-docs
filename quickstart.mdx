@@ -51,7 +51,7 @@ import { Vocantly } from '@vocantly/sdk';
 
 // Token from your backend—never use keys in the frontend
 const client = new Vocantly({
-  wsUrl: 'wss://ws.dev.vocantly.com/ws',
+  wsUrl: 'wss://ws.vocantly.com/ws',
   token
 });
 
@@ -62,8 +62,8 @@ await client.connect();
 
 ```typescript
 const client = new Vocantly({
-  wsUrl: 'wss://ws.dev.vocantly.com/ws',
-  apiUrl: 'https://dev.vocantly.com/api/v1',
+  wsUrl: 'wss://ws.vocantly.com/ws',
+  apiUrl: 'https://api.vocantly.com/api/v1',
   token
 });
 await client.connect();
@@ -157,7 +157,7 @@ async function initializeChat() {
   const token = await fetch('/api/sdk-token', { credentials: 'include' }).then(r => r.json()).then(d => d.token);
 
   const client = new Vocantly({
-    wsUrl: 'wss://ws.dev.vocantly.com/ws',
+    wsUrl: 'wss://ws.vocantly.com/ws',
     token,
     debug: true
   });
@@ -213,7 +213,7 @@ Use the REST API for reading data and managing resources. **Dashboard** access u
 ### Dashboard authentication (login)
 
 ```bash
-curl -X POST https://dev.vocantly.com/api/v1/auth/login \
+curl -X POST https://api.vocantly.com/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "your-email@example.com",
@@ -244,11 +244,11 @@ Use the **access token** in subsequent requests:
 
 ```bash
 # Get conversations
-curl https://dev.vocantly.com/api/v1/conversations \
+curl https://api.vocantly.com/api/v1/conversations \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 
 # Get messages for a conversation
-curl https://dev.vocantly.com/api/v1/conversations/{conversationId}/messages \
+curl https://api.vocantly.com/api/v1/conversations/{conversationId}/messages \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -265,7 +265,7 @@ Use the **SDK** (recommended) or connect manually. The **token** comes from your
 await client.connect();
 
 // Or manually (browsers: use Sec-WebSocket-Protocol)
-const ws = new WebSocket('wss://ws.dev.vocantly.com/ws', [token]);
+const ws = new WebSocket('wss://ws.vocantly.com/ws', [token]);
 ws.onopen = () => {
   ws.send(JSON.stringify({ type: 'join', conversation_id: 'conversation-id' }));
 };

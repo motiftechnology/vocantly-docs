@@ -38,7 +38,7 @@ import { Vocantly } from '@vocantly/sdk';
 
 // Token from your backend (POST /apps/:id/tokens)—never keys
 const client = new Vocantly({
-  wsUrl: 'wss://ws.dev.vocantly.com/ws',
+  wsUrl: 'wss://ws.vocantly.com/ws',
   token,
   debug: true
 });
@@ -102,7 +102,7 @@ Conversation
 
 ```typescript
 interface ClientConfig {
-  wsUrl: string;   // Required. e.g. 'wss://ws.dev.vocantly.com/ws'
+  wsUrl: string;   // Required. e.g. 'wss://ws.vocantly.com/ws'
   token: string;   // Required. From your backend (POST /apps/:id/tokens)
 
   apiUrl?: string; // Optional. Needed for client.conversations.list() and conversation.fetchMessages()
@@ -126,7 +126,7 @@ interface ClientConfig {
 import { Vocantly } from '@vocantly/sdk';
 
 const client = new Vocantly({
-  wsUrl: 'wss://ws.dev.vocantly.com/ws',
+  wsUrl: 'wss://ws.vocantly.com/ws',
   token // from your backend
 });
 

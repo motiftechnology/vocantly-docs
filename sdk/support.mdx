@@ -148,7 +148,7 @@ import { Vocantly } from '@vocantly/sdk';
 
 async function customerSupportFlow() {
   const client = new Vocantly({
-    wsUrl: 'wss://ws.dev.vocantly.com/ws',
+    wsUrl: 'wss://ws.vocantly.com/ws',
     token // customer token from your backend
   });
 
@@ -190,7 +190,7 @@ import { Vocantly } from '@vocantly/sdk';
 
 async function agentSupportFlow() {
   const client = new Vocantly({
-    wsUrl: 'wss://ws.dev.vocantly.com/ws',
+    wsUrl: 'wss://ws.vocantly.com/ws',
     token // agent token from your backend
   });
 
@@ -297,7 +297,7 @@ class SupportChat {
     this.role = role;
 
     this.client = new Vocantly({
-      wsUrl: 'wss://ws.dev.vocantly.com/ws',
+      wsUrl: 'wss://ws.vocantly.com/ws',
       token
     });
 

@@ -147,7 +147,7 @@ class ChatUI {
 
   async initialize(token: string) {
     this.client = new Vocantly({
-      wsUrl: 'wss://ws.dev.vocantly.com/ws',
+      wsUrl: 'wss://ws.vocantly.com/ws',
       token
     });
 
@@ -258,7 +258,7 @@ class PresenceManager {
 
 // Usage
 const client = new Vocantly({
-  wsUrl: 'wss://ws.dev.vocantly.com/ws',
+  wsUrl: 'wss://ws.vocantly.com/ws',
   token: 'your-token'
 });
 

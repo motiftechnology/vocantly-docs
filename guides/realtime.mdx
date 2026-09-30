@@ -12,7 +12,7 @@ Vocantly provides real-time features through WebSocket connections. The realtime
 ### Connection Endpoint
 
 ```
-wss://ws.dev.vocantly.com/ws
+wss://ws.vocantly.com/ws
 ```
 
 ### Authentication
@@ -20,7 +20,7 @@ wss://ws.dev.vocantly.com/ws
 Use the **token** from your backend (never keys). Browsers use `Sec-WebSocket-Protocol`:
 
 ```typescript
-const ws = new WebSocket('wss://ws.dev.vocantly.com/ws', [token]);
+const ws = new WebSocket('wss://ws.vocantly.com/ws', [token]);
 ```
 
 Or using the SDK:
@@ -29,7 +29,7 @@ Or using the SDK:
 import { Vocantly } from '@vocantly/sdk';
 
 const client = new Vocantly({
-  wsUrl: 'wss://ws.dev.vocantly.com/ws',
+  wsUrl: 'wss://ws.vocantly.com/ws',
   token // from your backend (POST /apps/:id/tokens)
 });
 
